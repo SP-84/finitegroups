@@ -1,0 +1,118 @@
+\documentclass[french]{article}
+\usepackage[T1]{fontenc} % Font enconding
+\usepackage[french]{babel} % Input encoding in French
+\usepackage{mathtools} % Include math symbols
+\usepackage{amsfonts} % Include font for math symbols
+\usepackage{amsthm} % Change definition layout
+\usepackage{amssymb} % Use aleph and beth symbols
+\usepackage{enumitem} % Modern item enumeration
+\usepackage{csquotes} % Typeset quoted texts in French correctly
+\usepackage[backend=biber]{biblatex} % For bibliography usage
+\usepackage{tikz} % Draw pictures and illustrate examples
+\addbibresource{references.bib}
+\usepackage{hyperref} % Select links in table of contents
+\hypersetup{ 
+    colorlinks,
+    citecolor=blue,
+    filecolor=black,
+    linkcolor=blue,
+    urlcolor=blue, 
+}
+
+\theoremstyle{definition}
+\newtheorem{definition}[subsubsection]{Définition}
+
+\theoremstyle{plain}
+\newtheorem{proposition}[subsubsection]{Proposition}
+
+\newtheorem{theorem}[subsubsection]{Théorème}
+
+\theoremstyle{plain}
+\newtheorem{corollary}[subsubsection]{Corollaire}
+
+\theoremstyle{plain}
+\newtheorem{lemma}[subsubsection]{Lemme}
+
+\theoremstyle{plain}
+\newtheorem{remark}[subsubsection]{Remarque}
+
+\theoremstyle{plain}
+\newtheorem*{notation}{Notation}
+
+\title{AMS ECUE Algèbre générale : Autour de la théorie des groupes finis}
+\author{Auteur :\\
+	Guillaume SALLOUM \\ 
+	L3 Mathématiques \\ 
+	Avignon Université
+	\and
+	Enseignant : \\
+	Philippe BOLLE \\
+	PR \\
+	Avignon Université}
+\date{}
+
+\begin{document}
+
+\maketitle
+\begin{abstract}
+	Le but de cette AMS est d'introduire certains concepts de théorie des groupes permettant de construire des théorèmes de classification.
+	Nous étudierons principalement les théorèmes de Sylow et leurs applications, ainsi que quelques éléments de théorie de la représentation  (lemme de Schur) utiles à la classification.
+	Le document est divisé en trois parties dont l'une est en anglais afin de lier les deux AMS.  
+\end{abstract}
+
+
+\tableofcontents
+\clearpage
+\section{Actions de groupes et théorèmes de Sylow}
+\subsection{Actions de groupes}
+
+\par Une idée récurrente en mathématiques est d'étudier comment un objet \textit{agit} sur un autre afin d'obtenir plus d'informations sur les deux. C'est précisement le cas lorsque l'on considère un groupe G agissant sur un ensemble A.
+
+\begin{definition}[Action de groupe]
+	Soit G un groupe et A un ensemble quelconque. Une action \textit{à gauche} de G sur A est une application \( f : G \times A \rightarrow A\) qui satisfait :
+	\begin{enumerate}[label = (\roman*)]
+		\item \(g1.(g2.a) = (g1g2).a \) pour tout \(g1,g2 \in G\), \(a \in A\),
+		\item \(1.a = a\) pour tout \(a \in A\)
+	\end{enumerate}
+
+	On peut définir de manière équivalente \cite[p. ~43]{dummit2003abstract} une action comme un morphisme \( \varphi : G \rightarrow S_{A} \) de G dans le groupe des permutations de A satisfaisant :
+	\begin{equation}
+		g.a = \varphi(g)(a) \quad \forall g \in G, \forall a \in A
+	\end{equation}
+\end{definition}
+
+Un exemple important d'action de G sur lui-même est la \textit{conjugaison}.
+
+\cite{serre1979ens}
+\cite{chenevier2024ens}
+
+\begin{align*}
+	f : G \times G &\to G \\
+	g . a &\mapsto gag^{-1}
+\end{align*}
+\subsection{Théorèmes de Sylow}
+
+Nous enonçons et prouvons une réciproque partielle au théorème de Lagrange utile pour déterminer si un groupe est simple.
+
+\begin{definition}[p-groupe]
+	Soit \( G \) un groupe et \( p \) un nombre premier.
+	\begin{enumerate}[label = (\roman*)]
+	\item Si \( |G| = p^{\alpha} \) pour un \( \alpha > 0 \), G est un \textit{p-groupe}. Un sous groupe H de G est appelé \textit{p-sous groupe}.
+	\item Si \( |G| = p^{\alpha}m \) où m n'est pas un multiple de p, alors un sous groupe d'ordre \( p^{\alpha} \) est appelé \textit{p-sous groupe de Sylow de G}.
+	\item L'ensemble des p-sous groupes de Sylow de G est noté \( Syl_{p}(G) \), et le nombre de p-sous groupes de Sylow de G est noté \( n_{p}(G) \).
+	\end{enumerate}
+\end{definition}
+
+\cite[p.~213]{chen2024napkin}
+
+\section{Vers la classification des groupes finis simples}
+
+\cite{dummit2003abstract}
+
+\section{Elements of representation theory of finite groups}
+\subsection{Character theory}
+
+\clearpage
+\printbibliography[heading=bibintoc]
+
+\end{document}
