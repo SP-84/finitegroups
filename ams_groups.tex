@@ -18,6 +18,50 @@
     linkcolor=blue,
     urlcolor=blue, 
 }
+\usepackage[toc,nomain,symbols]{glossaries} % Make a list of symbol used in the text 
+\makeglossaries
+\newglossaryentry{G}{
+	name={\ensuremath{G}},
+	sort=G,
+	description={Groupe quelconque},
+	type=symbols
+}
+\newglossaryentry{n}{
+	name={\ensuremath{H \trianglelefteq G}},
+	sort=n,
+	description={H est un sous-groupe distingué de G},
+	type=symbols
+}
+\newglossaryentry{sylpg}{
+	name={\ensuremath{Syl_{p}({G})}},
+	sort=sylpg,
+	description={Ensembles des p-sous-groupes de Sylow de G},
+	type=symbols
+}
+\newglossaryentry{leftconj}{
+	name={\ensuremath{x^{g}}},
+	sort=leftconj,
+	description={Conjugué à gauche de x par g},
+	type=symbols
+}
+\newglossaryentry{normalizer}{
+	name={\ensuremath{N_{G}(H)}},
+	sort=normalizer,
+	description={Normalisateur de G dans H},
+	type=symbols
+}
+\newglossaryentry{psubgroupsnb}{
+	name={\ensuremath{\alpha_{p}}},
+	sort=psubgroupsnb,
+	description={Nombre de p-sous-groupes de Sylow de G},
+	type=symbols
+}
+\newglossaryentry{isomorphism}{
+	name={\ensuremath{A \cong B}, \ensuremath{A \overset{\varphi}{\cong} B}},
+	sort=isomorphism,
+	description={A est isomorphe à B, \ensuremath{\varphi} est un isomorphisme de A vers B},
+	type=symbols
+}
 
 \theoremstyle{definition}
 \newtheorem{definition}[subsubsection]{Définition}
@@ -46,8 +90,9 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-	Le but de cette AMS est d'étudier les théorèmes de Sylow, réciproques partielles au thoérème de Lagrange.
-	Nous introduirons tout d'abord les notions utiles pour définir les théorèmes de Sylow, puis nous en donnerons deux preuves. Enfin nous en donnerons quelques applications pour la classification des groupes simples finis.% et en théorie de la représentation ?
+	Le but de cette AMS est d'étudier les théorèmes de Sylow, qui forment une réciproque partielle au thoérème de Lagrange.
+	Nous introduirons quelques notions utiles pour enonçer les théorèmes, puis nous en donnerons deux preuves : la première utilise les actions de groupes, tandis que la deuxième se base sur ????  .
+	Enfin nous en donnerons quelques applications, notemment pour la classification des groupes simples finis.% et en théorie de la représentation ?
 \end{abstract}
 
 
@@ -56,9 +101,15 @@
 \tableofcontents
 \clearpage
 
+Dans tout ce qui suit, nous utiliserons les notations suivantes :
+\glsaddall
+\printglossary[title=Notations,type=symbols,style=long,nonumberlist]
+
+\clearpage
+
+
 \section{Théorèmes de Sylow}
 \subsection{Notions préliminaires}
-\subsubsection{Actions de groupes}
 
 %\par Une idée récurrente en mathématiques est d'étudier comment un objet \textit{agit} sur un autre afin d'obtenir plus d'informations sur les deux. C'est précisement le cas lorsque l'on considère un groupe \( G \) agissant sur un ensemble \( A \).
 
@@ -69,25 +120,39 @@
 		\item \(1.a = a\) pour tout \(a \in A\)
 	\end{enumerate}
 
-	On peut définir de manière équivalente \cite[p. ~43]{dummit2003abstract} une action comme un morphisme \( \varphi : G \rightarrow S_{A} \) de G dans le groupe des permutations de A satisfaisant :
+	On peut définir de manière équivalente d'après le chapitre 1 du cours une action comme un morphisme \( \varphi : G \rightarrow S_{A} \) de G dans le groupe des permutations de A satisfaisant :
 	\begin{equation}
 		g.a = \varphi(g)(a) \quad \forall g \in G, \forall a \in A
 	\end{equation}
 \end{definition}
 
-Un exemple important d'action de G sur lui-même que nous allons utiliser par la suite est la \textit{conjugaison}.
+Un exemple important d'action de \( G \) sur lui-même que nous allons utiliser par la suite est la \textit{conjugaison}.
 
-\cite{serre1979ens}
-\cite{chenevier2024ens}
+%\cite{serre1979ens}
+%\cite{chenevier2024ens}
 
 \begin{align*}
 	f : G \times G &\to G \\
-	g . a &\mapsto gag^{-1}
+	g . a &\mapsto x^{g} \coloneq gag^{-1}
 \end{align*}
 
-\subsection{Enoncé et preuves}
+\begin{definition}[Normalisateur de H dans G]
+	Le normalisateur de \( H \) dans \( G \) est l'ensemble 
+	\( N_{G}({H}) \coloneq \{ g \in G \mid gPg^{-1} = P \} \).
+	De manière équivalente, c'est le stabilisateur de \( H \) sous l'action de conjugaison.
+\end{definition}
 
-Nous enonçons en premier lieu quelques définitions issues de \cite[p. ~123 et 139]{dummit2003abstract} utiles pour poser le théorème.
+\begin{definition}[Sous-ensembles conjugués]
+	Soit \( G \) un groupe, \( A \) et \( B \) deux sous-ensembles de \( G \). 
+	\( A \) et \( B \) sont dit 
+	\textit{conjugués dans G} s'il existe \( g \in G \) tel que \( B = gAg^{-1} \).
+	En d'autres termes, \( A \) et \( B \) sont dans le même orbite pour l'action de conjugaison.
+\end{definition}
+
+
+\subsection{Enoncé}
+
+Nous enonçons en premier lieu quelques définitions issues de l'énoncé du sujet (ou de manièr équivalente de \cite[p. ~123 et 139]{dummit2003abstract}) utiles pour poser le théorème.
 
 \begin{definition}[p-groupe]
 	Soit \( G \) un groupe et \( p \) un nombre premier.
@@ -98,26 +163,24 @@ Nous enonçons en premier lieu quelques définitions issues de \cite[p. ~123 et 
 	\end{enumerate}
 \end{definition}
 
-\begin{definition}[Sous-ensembles conjugués]
-	Soit \( G \) un groupe, \( A \) et \( B \) deux sous-ensembles de \( G \). 
-	\( A \) et \( B \) sont dit 
-	\textit{conjugués dans G} s'il existe \( g \in G \) tel que \( B = gAg^{-1} \).
-	En d'autres termes, \( A \) et \( B \) sont dans le même orbite pour l'action de conjugaison.
-\end{definition}
-
 Plusieurs formulations sont possibles pour les théorèmes, 
-nous avons décidé d'adapter celle de \cite[p.~215]{chen2024napkin} qui nous a le plus éclairé.
+nous avons décidé d'adapter celle de l'énoncé du sujet directement en ajoutant un dernier point issu de \cite[p.~215]{chen2024napkin}.
 
 \begin{theorem}[Théorèmes de Sylow]
 	Soit \( G \) un groupe d'ordre \( p^{\alpha}m \) où \( p \) est un nombre premier, \( m \) et \( p \) sont premiers entre eux. Alors on a :
 	\begin{enumerate}[label={\upshape(\roman*)}]
-		\item Au moins un p-sous-groupe de Sylow existe, donc \( n_{p}(G) \geq 1 \) et \( Syl_{p}(G) \neq \emptyset \)
-		\item \( n_{p} \equiv 1 [p] \)
-
+		\item (Existence) Au moins un p-sous-groupe de Sylow existe, c'est-à-dire que \( \alpha_{p}(G) \geq 1 \) et \( Syl_{p}(G) \neq \emptyset \)
+		\item 
+		\item Le nombre de p-sous-groupes de Sylow de G est congru à 1 modulo p, i.e. \( \alpha_{p} \equiv 1 [p] \) ou \( \alpha_{p} = 1 + kp \).
 
 	\end{enumerate}
 
 \end{theorem}
+
+\subsection{Première démonstration}
+
+\subsection{Deuxième démonstration}
+
 
 \clearpage
 \section{Applications}
@@ -125,7 +188,7 @@ nous avons décidé d'adapter celle de \cite[p.~215]{chen2024napkin} qui nous a 
 
 \cite{dummit2003abstract}
 
-\subsection{Elements of representation theory of finite groups}
+\subsection{Example : classifing all groups of order 60 up to isomorphism}
 
 
 \clearpage
