@@ -26,8 +26,14 @@
 	description={Groupe quelconque},
 	type=symbols
 }
+\newglossaryentry{card}{
+	name={\ensuremath{Card(X)}},
+	sort=card,
+	description={Cardinal de l'ensemble X fini},
+	type=symbols
+}
 \newglossaryentry{n}{
-	name={\ensuremath{H \trianglelefteq G}},
+	name={\ensuremath{H \triangleleft G}},
 	sort=n,
 	description={H est un sous-groupe distingué de G},
 	type=symbols
@@ -51,7 +57,7 @@
 	type=symbols
 }
 \newglossaryentry{psubgroupsnb}{
-	name={\ensuremath{\alpha_{p}}},
+	name={\ensuremath{n_{p}}},
 	sort=psubgroupsnb,
 	description={Nombre de p-sous-groupes de Sylow de G},
 	type=symbols
@@ -62,6 +68,7 @@
 	description={A est isomorphe à B, \ensuremath{\varphi} est un isomorphisme de A vers B},
 	type=symbols
 }
+
 
 \theoremstyle{definition}
 \newtheorem{definition}[subsubsection]{Définition}
@@ -84,7 +91,7 @@
 \newtheorem*{notation}{Notation}
 
 \title{AMS Autour des p-sous-groupes de Sylow}
-\author{Samy AMARA, Gabriel PITINO, et Guillaume SALLOUM} 
+\author{Samy Amara, Gabriel Pitino, et Guillaume Salloum} 
 \date{}
 
 \begin{document}
@@ -157,8 +164,8 @@ Nous enonçons en premier lieu quelques définitions issues de l'énoncé du suj
 \begin{definition}[p-groupe]
 	Soit \( G \) un groupe et \( p \) un nombre premier.
 	\begin{enumerate}[label = (\roman*)]
-	\item Si \( |G| = p^{\alpha} \) pour un \( \alpha > 0 \), \( G \) est un \textit{p-groupe}. Un sous groupe H de G est appelé \textit{p-sous groupe}.
-	\item Si \( |G| = p^{\alpha}m \) où m n'est pas un multiple de p, alors un sous groupe d'ordre \( p^{\alpha} \) est appelé \textit{p-sous groupe de Sylow de G}.
+	\item Si \( Card(G) = p^{n} \) pour un \( n > 0 \), \( G \) est un \textit{p-groupe}. Un sous groupe \( H \) de \( G \) est appelé \textit{p-sous groupe}.
+	\item Si \( Card(G) = p^{n}m \) où m n'est pas un multiple de p, alors un sous groupe d'ordre \( p^{n} \) est appelé \textit{p-sous groupe de Sylow de G}.
 	\item L'ensemble des p-sous groupes de Sylow de \( G \) est noté \( Syl_{p}(G) \), et le nombre de p-sous groupes de Sylow de \( G \) est noté \( n_{p}(G) \).
 	\end{enumerate}
 \end{definition}
@@ -167,17 +174,63 @@ Plusieurs formulations sont possibles pour les théorèmes,
 nous avons décidé d'adapter celle de l'énoncé du sujet directement en ajoutant un dernier point issu de \cite[p.~215]{chen2024napkin}.
 
 \begin{theorem}[Théorèmes de Sylow]
-	Soit \( G \) un groupe d'ordre \( p^{\alpha}m \) où \( p \) est un nombre premier, \( m \) et \( p \) sont premiers entre eux. Alors on a :
+	Soit \( G \) un groupe d'ordre \( p^{n}m \) où \( p \) est un nombre premier, \( m \) et \( p \) sont premiers entre eux. Alors on a :
 	\begin{enumerate}[label={\upshape(\roman*)}]
-		\item (Existence) Au moins un p-sous-groupe de Sylow existe, c'est-à-dire que \( \alpha_{p}(G) \geq 1 \) et \( Syl_{p}(G) \neq \emptyset \)
-		\item 
-		\item Le nombre de p-sous-groupes de Sylow de G est congru à 1 modulo p, i.e. \( \alpha_{p} \equiv 1 [p] \) ou \( \alpha_{p} = 1 + kp \).
+		\item (Existence) Au moins un p-sous-groupe de Sylow existe, c'est-à-dire que \( n_{p}(G) \geq 1 \) et \( Syl_{p}(G) \neq \emptyset \)
+		\item Tout sous-groupe de \( G \) d'ordre \( p^{r} \) avec \( 0 \leq r \leq n \) est inclus dans un p-sous-groupe de Sylow.
+		\item Deux p-sous-groupes de Sylow \( H \) et \( H' \) de \( G \) sont conjugués entre eux, c'est-à-dire il existe \( g \in G \) tel que \( H' = gHg^{-1} = \{ ghg^{-1} \mid h \in H, g \in G \} \).
+		\item Le nombre de p-sous-groupes de Sylow de G est congru à 1 modulo p, i.e. \( n_{p} \equiv 1 [p] \) ou \( Card(Syl_{p}({G})) = n_{p} = 1 + kp \).
 
 	\end{enumerate}
 
 \end{theorem}
 
 \subsection{Première démonstration}
+
+\begin{proof}
+	\begin{enumerate}[label={\upshape(\roman*)}]
+		\item Soit
+\begin{align*}
+	\varphi : G \times X &\to X \\
+	(g,x) &\mapsto \varphi(g,x) \coloneq g.x
+\end{align*}
+
+une action de \( G \) sur \( X \) où \( X \) est l'ensemble des parties de \( G \) de cardinal \( p^{n} \). En utilisant un résultat de probabilités que l'on admet, on a :
+
+\begin{align*}
+	Card(X) = \binom{p^{n}m}{p^{n}} \not\equiv 0 \mod  p 
+\end{align*}
+
+
+En d'autres termes \( Card(X) \) n'est pas un multiple de \( p \).
+Soit \( O_{x} \) une orbite de \( X \) sous l'action de \( \varphi \) telle que  p ne divise pas \( Card(O_{x}) \). Soit \( S \in O_{x} \) et \( H = Stab_{G}({S}) \) où 
+\( H = \{ g.s = s \mid g \in G, s \in S \} \)
+Montrons que \( Card(H) = p^{n} \) en montrant que \( Card(H) \mid p^{n} \) et \( p^{n} \mid Card(H) \).
+
+\par Montrons d'abord que \( Card(H) \mid p^{n} \). \\ 
+Comme \( G \) est fini, alors on \( Card(O_{x}) = [G : H]  = \frac{Card(G)}{Card(H)} \)
+On en déduit que \( p^{n} \mid Card(H) \) car sinon \( Card(X) \) pourrait être un multiple de \( p \).
+
+\par Réciproquement, montrons que \( p^{n} \mid Card(H) \). Soit une nouvelle action :
+\begin{align*}
+	\psi : H \times S &\to S \\
+	(h,s) &\mapsto \varphi(h,s) \coloneq h.s
+\end{align*}
+
+or \( Stab_{H}({s}) = \{ h \in H, s \in S \mid h.s = s \} = \{ h \in \{g \in G \mid g.s = s \} \mid h.s = s \} = {e_{G}} \)
+
+S est partitionné en orbites que l'on note \( O_y \). On a alors \( S = \bigcup O_{y} \) et 
+\( Card(S) = \sum Card(O_{y}) \).
+Donc les orbites de \( S \) sous l'action de \( \psi \) sont de cardinal \( Card(O_y) = [H : Stab_{H}({s}) ] = \frac{Card(H)}{Card{Stab_{H}({s})}} = Card(H) \) car \( Card(Stab_{H}({s})) = Card(e_{G}) = 1 \)
+
+D'où \( Card(S) = \sum Card(H) = \sum Card(O_{y}) \). \\
+Ainsi \( Card(H) \mid Card(S) = p^{n} \).
+
+\item Soit \( P \in Syl_{p}({G}) \). \( P \) existe d'après (i). Montrons que pour tout p-sous-groupe \( Q \) de \( G \) on a \( Q \subseteq gPg^{-1} \), c'est-à-dire que \( Q \) est dans un sous-groupe conjugué de \( P \).
+
+	\end{enumerate}
+\end{proof}
+
 
 \subsection{Deuxième démonstration}
 
