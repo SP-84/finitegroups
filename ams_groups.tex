@@ -257,14 +257,18 @@ Soit \( O_{p} \) un orbite de \( gP \). Puisque \( gP \) est partitionné en orb
 Alors une classe \( \overline{g}P \) est un point fixe pour tout \( q \in Q \), c'est-à-dire que \( \forall q \in Q, \exists \overline{g} \in G, q\overline{g}P = \overline{g}P \). \\
 Donc \( \forall q \in Q, qg \in gP \). D'où \( \forall q \in Q, q \in gPg^{-1} \) soit \( Q \subseteq gPg^{-1} \).
 
+\item
+
 \item Soit \( P \in Syl_{p}(G) \), et \( \chi \) l'action de conjugaison de \( G \) sur \( Syl_{p}(G) \),
 \begin{align*}
 	\chi : G \times Syl_{p}(G) &\to Syl_{p}(G) \\
-	(g,P) &\mapsto P^{g} \coloneq gPg^{-1}
+	(g,P) &\mapsto g.P = P^{g} \coloneq gPg^{-1}
 \end{align*}
 
-Puisque \( P \) est en particulier un p-groupe, \( n_p(G) \mod p \) est le nombre de points fixes de \( \chi \). Montrons que \( P \) est le seul point fixe de \( \chi \), cela est équivalent à montrer que \( Stab_P(G) = \{ g \in G \mid gPg^{-1} = P \} = N_G(P) = P \) donc que \( P \triangleleft G \). Soit \( Q \) un autre point fixe de \( \chi \) tel que \( Stab_Q(G) = Q \). On a \( N_G(Q) = \)
-
+Puisque \( P \) est en particulier un p-groupe, \( n_p(G) \mod p \) est le nombre de points fixes de \( \chi \). Montrons que \( P \) est le seul point fixe de \( \chi \), cela est équivalent à montrer que \( Stab_P(G) = \{ g \in G \mid gPg^{-1} = P \} = N_G(P) = P \) donc que \( P \triangleleft G \). Soit \( Q \) un autre point fixe de \( \chi \), c'est-à-dire \(Q \in Stab_Q(G) = \{g.Q \mid g.Q = gQg^{-1} = Q \}  \). 
+Alors \( N_G(Q) = \{ g \in Q \mid gQg^{-1} = Q\} \) est tel que \( P \subset N_G(Q) \) et \( Q \subset N_G(Q) \).
+On applique (iii) sur \( N_G(Q) \) : \( P \) et \( Q \) sont des p-sous-groupes de Sylow de \( N_G(Q) \), donc ce sont des sous-groupes conjugués. D'où \( P = Q \) et \( P \) est le seul point fixe de \( \chi \). On en déduit que \( n_p(G) \equiv 1 \mod p \). \\
+Montrons ensuite que \( m \) est un diviseur de \( n_p(G) \) :
 	\end{enumerate}
 \end{proof}
 
