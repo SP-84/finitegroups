@@ -19,59 +19,59 @@
     urlcolor=blue, 
 }
 \usepackage[toc,nomain,symbols]{glossaries} % Make a list of symbol used in the text 
-\makeglossaries
+\makenoidxglossaries
 \newglossaryentry{G}{
 	name={\ensuremath{G}},
-	sort=G,
+	sort=0,
 	description={Groupe quelconque},
 	type=symbols
 }
 \newglossaryentry{card}{
-	name={\ensuremath{Card(X)}},
-	sort=card,
-	description={Cardinal de l'ensemble X fini},
+	name={\ensuremath{Card(X)}, \ensuremath{Card(G)}},
+	sort=1,
+	description={Cardinal de l'ensemble \ensuremath{X}, ordre d'un groupe \ensuremath{G}},
 	type=symbols
 }
 \newglossaryentry{n}{
 	name={\ensuremath{H \triangleleft G}},
-	sort=n,
-	description={H est un sous-groupe distingué de G},
+	sort=2,
+	description={\ensuremath{H} est un sous-groupe distingué de \ensuremath{G}},
 	type=symbols
 }
 \newglossaryentry{sylpg}{
 	name={\ensuremath{Syl_{p}({G})}},
-	sort=sylpg,
-	description={Ensembles des p-sous-groupes de Sylow de G},
+	sort=6,
+	description={Ensemble des p-sous-groupes de Sylow de \ensuremath{G}},
 	type=symbols
 }
 \newglossaryentry{leftconj}{
 	name={\ensuremath{x^{g}}},
-	sort=leftconj,
-	description={Conjugué à gauche de x par g},
+	sort=3,
+	description={Conjugué à gauche de \ensuremath{x} par \ensuremath{g}},
 	type=symbols
 }
 \newglossaryentry{normalizer}{
 	name={\ensuremath{N_{G}(H)}},
-	sort=normalizer,
-	description={Normalisateur de H dans G},
+	sort=5,
+	description={Normalisateur de \ensuremath{H} dans \ensuremath{G}},
 	type=symbols
 }
 \newglossaryentry{psubgroupsnb}{
 	name={\ensuremath{n_{p}(G)}},
-	sort=psubgroupsnb,
-	description={Nombre de p-sous-groupes de Sylow de G},
+	sort=7,
+	description={Nombre de p-sous-groupes de Sylow de \ensuremath{G}},
 	type=symbols
 }
 \newglossaryentry{isomorphism}{
 	name={\ensuremath{A \cong B}, \ensuremath{A \overset{\varphi}{\cong} B}},
-	sort=isomorphism,
-	description={A est isomorphe à B, \ensuremath{\varphi} est un isomorphisme de A vers B},
+	sort=8,
+	description={\ensuremath{A} est isomorphe à \ensuremath{B}, \ensuremath{\varphi} est un isomorphisme de \ensuremath{A} vers \ensuremath{B}},
 	type=symbols
 }
 \newglossaryentry{stabilizer}{
 	name={\ensuremath{Stab_{G}(H)}},
-	sort=stabilizer,
-	description={Stabilisateur de H dans G},
+	sort=4,
+	description={Stabilisateur de \ensuremath{H} dans \ensuremath{G}},
 	type=symbols
 }
 
@@ -117,7 +117,8 @@
 
 Dans tout ce qui suit, nous utiliserons les notations suivantes :
 \glsaddall
-\printglossary[title=Notations,type=symbols,style=long,nonumberlist]
+\renewcommand*{\arraystretch}{1.2} % increase vertical spacing between entries, default is 1
+\printnoidxglossary[title=Notations,type=symbols,style=long,sort=standard,nonumberlist]
 
 \clearpage
 
@@ -128,7 +129,7 @@ Dans tout ce qui suit, nous utiliserons les notations suivantes :
 %\par Une idée récurrente en mathématiques est d'étudier comment un objet \textit{agit} sur un autre afin d'obtenir plus d'informations sur les deux. C'est précisement le cas lorsque l'on considère un groupe \( G \) agissant sur un ensemble \( A \).
 
 \begin{definition}[Action de groupe, chapitre 1 du cours]
-	Soit \( G \) un groupe et \( A \) un ensemble quelconque. Une action \textit{à gauche} de \( G \) sur \( A \) est une application \( f : G \times A \rightarrow A\) qui satisfait :
+	Soit \( G \) un groupe et \( A \) un ensemble quelconque. Une \textit{action à gauche} de \( G \) sur \( A \) est une application \( f : G \times A \rightarrow A\) qui satisfait :
 	\begin{enumerate}[label = (\roman*)]
 		\item \(g1.(g2.a) = (g1g2).a \) pour tout \(g1,g2 \in G\), \(a \in A\),
 		\item \(1.a = a\) pour tout \(a \in A\)
@@ -140,33 +141,33 @@ Dans tout ce qui suit, nous utiliserons les notations suivantes :
 	\end{equation}
 \end{definition}
 
-Un exemple important d'action de \( G \) sur lui-même que nous allons utiliser par la suite est la \textit{conjugaison}.
+Un exemple important d'action de \( G \) sur un ensemble \( A \) que nous allons utiliser par la suite est la \textit{conjugaison à gauche}.
 
 %\cite{serre1979ens}
 %\cite{chenevier2024ens}
 
 \begin{align*}
-	f : G \times G &\to G \\
-	(g,a) &\mapsto x^{g} \coloneq gag^{-1}
+	f : G \times A &\to A \\
+	(g,a) &\mapsto a^{g} \coloneq gag^{-1}
 \end{align*}
 
 \begin{definition}[Normalisateur de H dans G]\cite[p.~217]{chen2024napkin}.
 	Le normalisateur de \( H \) dans \( G \) est l'ensemble 
 	\( N_{G}({H}) \coloneq \{ g \in G \mid gPg^{-1} = P \} \).
-	De manière équivalente, c'est le stabilisateur de \( H \) sous l'action de conjugaison.
+	De manière équivalente, c'est le stabilisateur de \( H \) sous l'action de conjugaison de \( G \) sur \( H \).
 \end{definition}
 
-\begin{definition}[Sous-ensembles conjugués]\cite[p. ~??]{dummit2003abstract} 
+\begin{definition}[Sous-ensembles conjugués]\cite[p. ~123]{dummit2003abstract} 
 	Soit \( G \) un groupe, \( A \) et \( B \) deux sous-ensembles de \( G \). 
 	\( A \) et \( B \) sont dit 
 	\textit{conjugués dans G} s'il existe \( g \in G \) tel que \( B = gAg^{-1} \).
-	En d'autres termes, \( A \) et \( B \) sont dans le même orbite pour l'action de conjugaison.
+	En d'autres termes, \( A \) et \( B \) sont dans le même orbite pour l'action de conjugaison. Si \( A \) et \( B \) sont des sous-groupes de \( G \), ce sont des \textit{sous-groupes conjugués} de \( G \).
 \end{definition}
 
 
 \subsection{Enoncé}
 
-Nous enonçons en premier lieu quelques définitions issues de l'énoncé du sujet (ou de manièr équivalente de \cite[p. ~123 et 139]{dummit2003abstract}) utiles pour poser le théorème.
+Nous enonçons en premier lieu quelques définitions issues de l'énoncé du sujet (ou de manière équivalente de \cite[p. ~123 et 139]{dummit2003abstract}) utiles pour poser le théorème.
 
 \begin{definition}[p-groupe]
 	Soit \( G \) un groupe et \( p \) un nombre premier.
@@ -183,10 +184,10 @@ nous avons décidé d'adapter celle de l'énoncé du sujet directement en ajouta
 \begin{theorem}[Théorèmes de Sylow]
 	Soit \( G \) un groupe d'ordre \( p^{n}m \) où \( p \) est un nombre premier, \( m \) et \( p \) sont premiers entre eux. Alors on a :
 	\begin{enumerate}[label={\upshape(\roman*)}]
-		\item (Existence) Au moins un p-sous-groupe de Sylow existe, c'est-à-dire que \( n_{p}(G) \geq 1 \) et \( Syl_{p}(G) \neq \emptyset \)
+		\item (Existence) Au moins un p-sous-groupe de Sylow existe, c'est-à-dire que \( n_{p}(G) \geq 1 \) et \( Syl_{p}(G) \neq \emptyset \).
 		\item Tout sous-groupe de \( G \) d'ordre \( p^{r} \) avec \( 0 \leq r \leq n \) est inclus dans un p-sous-groupe de Sylow.
-		\item Deux p-sous-groupes de Sylow \( H \) et \( H' \) de \( G \) sont conjugués entre eux, c'est-à-dire il existe \( g \in G \) tel que \( H' = gHg^{-1} = \{ ghg^{-1} \mid h \in H, g \in G \} \).
-		\item Le nombre de p-sous-groupes de Sylow de G est congru à 1 modulo p, i.e. \( n_{p} \equiv 1 [p] \) ou \( Card(Syl_{p}({G})) = n_{p} = 1 + kp \).
+		\item Deux p-sous-groupes de Sylow \( H \) et \( H' \) de \( G \) sont conjugués entre eux, c'est-à-dire il existe \( g \in G \) tel que \( H' = gHg^{-1} = \{ ghg^{-1} \mid h \in H, g \in G \} \). Par conséquent \( H \cong H' \).
+		\item Le nombre de p-sous-groupes de Sylow de G est congru à 1 modulo p, i.e. \( n_{p} \equiv 1 [p] \) ou \( Card(Syl_{p}({G})) = n_{p}(G) = 1 + kp \).
 			On a de plus, pour tout \( P \in Syl_{p}({G}) \), \( n_{p}({G}) = [G : N_{G}({P}) ] \), donc \( m \) est un diviseur de \( n_p({G}) \).
 
 	\end{enumerate}
@@ -241,7 +242,7 @@ Donc les orbites de \( S \) sous l'action de \( \psi \) sont de cardinal \( Card
 D'où \( Card(S) = Card(H) = \sum Card(O_{y}) \). \\
 Ainsi \( Card(H) \mid Card(S) = p^{n} \).
 
-\item Soit \( P \in Syl_{p}({G}) \). \( P \) existe d'après (i). Montrons que pour tout p-sous-groupe \( Q \) de \( G \) on a \( Q \subseteq gPg^{-1} \), c'est-à-dire que \( Q \) est dans un sous-groupe conjugué de \( P \). On procède par disjonction de cas sur \( Q \).
+\item Soit \( P \in Syl_{p}({G}) \), \( P \) existe d'après (i). Montrons que pour tout p-sous-groupe \( Q \) de \( G \) on a \( Q \subseteq gPg^{-1} \), c'est-à-dire que \( Q \) est dans un sous-groupe conjugué de \( P \). On procède par disjonction de cas sur \( Q \).
 	\par \textit{Supposons que \( Q \) est un p-sous-groupe de Sylow de \( G \) :}\\
 	\( Card(Q) = p^{m}\) pour \( 1 \le m \le n \). Puique \( Card(P) = p^{l}\) pour 
 	\( 1 \le l \le n \) aussi, on a soit \( l \ge m \), soit \( l \le m \). Dans les 
@@ -265,10 +266,16 @@ Donc \( \forall q \in Q, qg \in gP \). D'où \( \forall q \in Q, q \in gPg^{-1} 
 	(g,P) &\mapsto g.P = P^{g} \coloneq gPg^{-1}
 \end{align*}
 
-Puisque \( P \) est en particulier un p-groupe, \( n_p(G) \mod p \) est le nombre de points fixes de \( \chi \). Montrons que \( P \) est le seul point fixe de \( \chi \), cela est équivalent à montrer que \( Stab_P(G) = \{ g \in G \mid gPg^{-1} = P \} = N_G(P) = P \) donc que \( P \triangleleft G \). Soit \( Q \) un autre point fixe de \( \chi \), c'est-à-dire \(Q \in Stab_Q(G) = \{g.Q \mid g.Q = gQg^{-1} = Q \}  \). 
+Puisque \( P \) est en particulier un p-groupe, \( n_p(G) \mod p \) est le nombre de points fixes de \( \chi \). Montrons que \( P \) est le seul point fixe de \( \chi \), cela est équivalent à montrer que \( Stab_P(G) = \{ g \in G \mid g.P = gPg^{-1} = P \} = N_G(P) = P \) donc que \( P \triangleleft G \). Soit \( Q \) un autre point fixe de \( \chi \), c'est-à-dire \(Q \in Stab_Q(G) = \{g.Q \mid g.Q = gQg^{-1} = Q \}  \). 
 Alors \( N_G(Q) = \{ g \in Q \mid gQg^{-1} = Q\} \) est tel que \( P \subset N_G(Q) \) et \( Q \subset N_G(Q) \).
 On applique (iii) sur \( N_G(Q) \) : \( P \) et \( Q \) sont des p-sous-groupes de Sylow de \( N_G(Q) \), donc ce sont des sous-groupes conjugués. D'où \( P = Q \) et \( P \) est le seul point fixe de \( \chi \). On en déduit que \( n_p(G) \equiv 1 \mod p \). \\
-Montrons ensuite que \( m \) est un diviseur de \( n_p(G) \) :
+Montrons ensuite que \( m \) est un diviseur de \( n_p(G) \) : d'après ce qui précède, \( \chi \) ne possède qu'un seul orbite qui est \( Syl_p({G}) \) entier. Donc par théorème, on a :
+\begin{align*}
+	Card(O_P)&= Card(Syl_p(G)) = n_p(G) = [G : Stab_G(P) ] \\ 
+	&= \\
+	&= \\
+\end{align*}
+
 	\end{enumerate}
 \end{proof}
 
