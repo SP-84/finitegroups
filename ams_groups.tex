@@ -69,9 +69,9 @@
 	type=symbols
 }
 \newglossaryentry{stabilizer}{
-	name={\ensuremath{Stab_{G}(H)}},
+	name={\ensuremath{Stab_{G}(x)}},
 	sort=4,
-	description={Stabilisateur de \ensuremath{H} dans \ensuremath{G}},
+	description={Stabilisateur de \ensuremath{x} dans \ensuremath{G}},
 	type=symbols
 }
 
@@ -151,10 +151,10 @@ Un exemple important d'action de \( G \) sur un ensemble \( A \) que nous allons
 	(g,a) &\mapsto a^{g} \coloneq gag^{-1}
 \end{align*}
 
-\begin{definition}[Normalisateur de H dans G]\cite[p.~217]{chen2024napkin}.
+\begin{definition}[Normalisateur de \ensuremath{H} dans \ensuremath{G}]\cite[p.~217]{chen2024napkin}.
 	Le normalisateur de \( H \) dans \( G \) est l'ensemble 
 	\( N_{G}({H}) \coloneq \{ g \in G \mid gPg^{-1} = P \} \).
-	De manière équivalente, c'est le stabilisateur de \( H \) sous l'action de conjugaison de \( G \) sur \( H \).
+	De manière équivalente, c'est le stabilisateur de \( H \) sous l'action de conjugaison de \( G \) sur l'ensemble de ses sous-groupes.
 \end{definition}
 
 \begin{definition}[Sous-ensembles conjugués]\cite[p. ~123]{dummit2003abstract} 
@@ -169,12 +169,12 @@ Un exemple important d'action de \( G \) sur un ensemble \( A \) que nous allons
 
 Nous enonçons en premier lieu quelques définitions issues de l'énoncé du sujet (ou de manière équivalente de \cite[p. ~123 et 139]{dummit2003abstract}) utiles pour poser le théorème.
 
-\begin{definition}[p-groupe]
+\begin{definition}[\ensuremath{p}-groupe]
 	Soit \( G \) un groupe et \( p \) un nombre premier.
 	\begin{enumerate}[label = (\roman*)]
 	\item Si \( Card(G) = p^{n} \) pour un \( n > 0 \), \( G \) est un \textit{p-groupe}. Un sous groupe \( H \) de \( G \) est appelé \textit{p-sous groupe}.
 	\item Si \( Card(G) = p^{n}m \) où m n'est pas un multiple de p, alors un sous groupe d'ordre \( p^{n} \) est appelé \textit{p-sous groupe de Sylow de G}.
-	\item L'ensemble des p-sous groupes de Sylow de \( G \) est noté \( Syl_{p}(G) \), et le nombre de p-sous groupes de Sylow de \( G \) est noté \( n_{p}(G) \).
+	\item L'ensemble des \(p\)-sous groupes de Sylow de \( G \) est noté \( Syl_{p}(G) \), et le nombre de \(p\)-sous groupes de Sylow de \( G \) est noté \( n_{p}(G) \).
 	\end{enumerate}
 \end{definition}
 
@@ -196,6 +196,7 @@ nous avons décidé d'adapter celle de l'énoncé du sujet directement en ajouta
 
 \subsection{Première démonstration}
 
+\par La première preuve est due à \cite[p.~216-218]{chen2024napkin}, nous l'avons reformulée et avons explicité certains détails supplémentaires pour plus de clarté dans la présentation.
 \begin{proof}
 	\begin{enumerate}[label={\upshape(\roman*)}]
 		\item 
@@ -213,36 +214,37 @@ une action de \( G \) sur \( X \), où \( X \) est l'ensemble des parties de \( 
 
 
 En d'autres termes \( Card(X) \) n'est pas un multiple de \( p \).
-Soit \( O_{x} \) une orbite de \( X \) sous l'action de \( \varphi \) telle que  p ne divise pas \( Card(O_{x}) \). Soit \( S \in O_{x} \) et \( H = Stab_{G}({S}) \) où 
-\( H = \{ g.s = s \mid g \in G, s \in S \} \). \\
+Soit \( O \) une orbite de \( X \) sous l'action \( \varphi \) telle que \( p \) ne divise pas \( Card(O) \). Soit \( S \in O \) et \( H = Stab_{G}({S}) = \{ g \in G \mid g.S = S \} \). \\
 Montrons que \( Card(H) = p^{n} \) en montrant qu'on a à la fois \( Card(H) \mid p^{n} \) et \( p^{n} \mid Card(H) \).
 
-\par Montrons d'abord que \( Card(H) \mid p^{n} \). \\ 
-Comme \( G \) est fini, alors \( Card(O_{x}) = [G : H]  = \frac{Card(G)}{Card(H)} \).
+\par Montrons d'abord que \( Card(H) \mid p^{n} \). \( G \) est fini et on a une bijection entre \( O_x \) et \( G/H \), alors \( Card(O_{x}) = [G : H]  = \frac{Card(G)}{Card(H)} \).
 On en déduit que \( p^{n} \mid Card(H) \), car sinon \( Card(X) \) pourrait être un multiple de \( p \).
 
 \par Réciproquement, montrons que \( p^{n} \mid Card(H) \). Soit une nouvelle action :
 \begin{align*}
 	\psi : H \times S &\to S \\
-	(h,s) &\mapsto \varphi(h,s) \coloneq h.s
+	(h,s) &\mapsto h.s
 \end{align*}
 
-Or 
+Or pour \( s \in S \) fixé, on a :
 \begin{align*}
-	Stab_{H}({s}) &= \{ h \in H, s \in S \mid h.s = s \} \\ 
-	&= \{ h \in \{g \in G \mid g.s = s \} \mid h.s = s \} \\
+	Stab_{H}({s}) &= \{ h \in H \mid h.s = s \} \\ 
+		      &= \{ h \in \{g \in G \mid g.s = s \} \mid h.s = s \} \text{ par définition de } H\\
 	&= \{e_{G}\} 
 \end{align*}
 
 
 S est partitionné en orbites que l'on note \( O_y \). On a alors \( S = \bigsqcup O_{y} \) et 
 \( Card(S) = \sum Card(O_{y}) \).
-Donc les orbites de \( S \) sous l'action de \( \psi \) sont de cardinal \( Card(O_y) = [H : Stab_{H}({s}) ] = \frac{Card(H)}{Card({Stab_{H}({s}))}} = Card(H) \) car \( Card(Stab_{H}({s})) = Card(e_{G}) = 1 \).
-
-D'où \( Card(S) = Card(H) = \sum Card(O_{y}) \). \\
+Par bijection entre \( O_y \) et \( S/Stab_H(s) \), une orbite \( O_y \) de \( S \) sous \( \psi \) est de cardinal \( Card(O_y) = [H : Stab_{H}({s}) ] = Card(H) \) car \( Card(Stab_{H}({s})) = Card(e_{G}) = 1 \). \\
+D'où \( Card(S) = \sum Card(O_{y}) = \sum Card(H) \). \\
 Ainsi \( Card(H) \mid Card(S) = p^{n} \).
 
-\item Soit \( P \in Syl_{p}({G}) \), \( P \) existe d'après (i). Montrons que pour tout p-sous-groupe \( Q \) de \( G \) on a \( Q \subseteq gPg^{-1} \), c'est-à-dire que \( Q \) est dans un sous-groupe conjugué de \( P \). On procède par disjonction de cas sur \( Q \).
+\item Soit \( r \in [\![0,n]\!] \), \( Q \) un sous-groupe de \( G \) d'ordre \( p^{r} \). 
+D'après (i) au moins un \( P \in Syl_p(G) \) existe, où \( Card(P) = p^{n} \geq p ^{r} = Card(Q) \).
+Donc \( Q \subseteq P \).
+
+\item Soit \( P \in Syl_{p}({G}) \). Montrons que pour tout \(p\)-sous-groupe \( Q \) de \( G \) on a \( Q \subseteq gPg^{-1} \), c'est-à-dire que \( Q \) est dans un sous-groupe conjugué de \( P \). On procède par disjonction de cas sur \( Q \).
 	\par \textit{Supposons que \( Q \) est un p-sous-groupe de Sylow de \( G \) :}\\
 	\( Card(Q) = p^{m}\) pour \( 1 \le m \le n \). Puique \( Card(P) = p^{l}\) pour 
 	\( 1 \le l \le n \) aussi, on a soit \( l \ge m \), soit \( l \le m \). Dans les 
@@ -251,31 +253,29 @@ Ainsi \( Card(H) \mid Card(S) = p^{n} \).
 	\par \textit{Supposons que \( Q \) n'est pas un p-sous-groupe de Sylow de \( G \) :}\\ On considère l'action \( \varphi \) de \( Q \) sur les classes à gauche de \( P \) pour la relation \( \sim_{P} \) de congruence à gauche modulo \( P \) définie comme dans le cours. 
 \begin{align*}
 	\varphi : Q \times gP &\to gP \\
-	(q,gp) &\mapsto \varphi(q,gp) \coloneq q.gp
+	(q,gp) &\mapsto q.gp
 \end{align*}
 
-Soit \( O_{p} \) un orbite de \( gP \). Puisque \( gP \) est partitionné en orbites et que \( Q \) et un p-groupe, alors \( Card(O_{p}) \) est un diviseur de \( p \). Or le nombre de classes à gacuhe de \( P \) est \([G : P] = \frac{p^{n}m}{p^{n}} = m  \), qui n'est pas un diviseur de \( p \). \\
+Soit \( O_{p} \) un orbite de \( gP \). Puisque \( gP \) est partitionné en orbites et que \( Q \) et un \(p\)-groupe, alors \( Card(O_{p}) \) est un diviseur de \( p \). Or le nombre de classes à gauche de \( P \) est \([G : P] = \frac{p^{n}m}{p^{n}} = m  \), qui n'est pas un diviseur de \( p \). \\
 Alors une classe \( \overline{g}P \) est un point fixe pour tout \( q \in Q \), c'est-à-dire que \( \forall q \in Q, \exists \overline{g} \in G, q\overline{g}P = \overline{g}P \). \\
-Donc \( \forall q \in Q, qg \in gP \). D'où \( \forall q \in Q, q \in gPg^{-1} \) soit \( Q \subseteq gPg^{-1} \).
-
-\item
+Donc \( \forall q \in Q, q\overline{g} \in \overline{g}P \). D'où \( \forall q \in Q, q \in \overline{g}P\overline{g^{-1}} \) pour un \( \overline{g} \in G \) soit \(\exists g \in G, Q \subseteq gPg^{-1} \). Donc Q est un sous-groupe conjugué de \( G \).
 
 \item Soit \( P \in Syl_{p}(G) \), et \( \chi \) l'action de conjugaison de \( G \) sur \( Syl_{p}(G) \),
 \begin{align*}
 	\chi : G \times Syl_{p}(G) &\to Syl_{p}(G) \\
-	(g,P) &\mapsto g.P = P^{g} \coloneq gPg^{-1}
+	(g,P) &\mapsto g.P = gPg^{-1}
 \end{align*}
 
-Puisque \( P \) est en particulier un p-groupe, \( n_p(G) \mod p \) est le nombre de points fixes de \( \chi \). Montrons que \( P \) est le seul point fixe de \( \chi \), cela est équivalent à montrer que \( Stab_P(G) = \{ g \in G \mid g.P = gPg^{-1} = P \} = N_G(P) = P \) donc que \( P \triangleleft G \). Soit \( Q \) un autre point fixe de \( \chi \), c'est-à-dire \(Q \in Stab_Q(G) = \{g.Q \mid g.Q = gQg^{-1} = Q \}  \). 
-Alors \( N_G(Q) = \{ g \in Q \mid gQg^{-1} = Q\} \) est tel que \( P \subset N_G(Q) \) et \( Q \subset N_G(Q) \).
-On applique (iii) sur \( N_G(Q) \) : \( P \) et \( Q \) sont des p-sous-groupes de Sylow de \( N_G(Q) \), donc ce sont des sous-groupes conjugués. D'où \( P = Q \) et \( P \) est le seul point fixe de \( \chi \). On en déduit que \( n_p(G) \equiv 1 \mod p \). \\
-Montrons ensuite que \( m \) est un diviseur de \( n_p(G) \) : d'après ce qui précède, \( \chi \) ne possède qu'un seul orbite qui est \( Syl_p({G}) \) entier. Donc par théorème, on a :
+Puisque \( P \) est en particulier un \(p\)-groupe, \( n_p(G) \mod p \) est le nombre de points fixes de \( \chi \). Montrons que \( P \) est le seul point fixe de \( \chi \), cela est équivalent à montrer que \( Stab_P(G) = \{ g \in G \mid g.P = gPg^{-1} = P \} = P \) donc que \( N_G(P) = P \) et \( P \triangleleft G \). Soit \( Q \) un autre point fixe de \( \chi \), c'est-à-dire \(Q \in Stab_Q(G) = \{g.Q \mid g.Q = gQg^{-1} = Q \}  \). \\
+Alors \( N_G(Q) = \{ g \in G \mid gQg^{-1} = Q\} \) avec \( P \subset N_G(Q) \) et \( Q \subset N_G(Q) \). \\
+On applique (iii) sur \( N_G(Q) \) : \( P \) et \( Q \) sont des \(p\)-sous-groupes de Sylow de \( N_G(Q) \), donc ce sont des sous-groupes conjugués. D'où \( P = Q \) et \( P \) est le seul point fixe de \( \chi \). On en déduit que \( n_p(G) \equiv 1 \mod p \). \\
+Montrons ensuite que \( m \) est un diviseur de \( n_p(G) \) : d'après ce qui précède, \( \chi \) ne possède qu'un seul orbite \( O_P \) qui est \( Syl_p({G}) \) entier. Puisqu'on a une bijection entre \( O_P \) et \( G/Stab_G(P) \), on en déduit que :
 \begin{align*}
-	Card(O_P)&= Card(Syl_p(G)) = n_p(G) = [G : Stab_G(P) ] \\ 
-	&= \\
-	&= \\
+	Card(O_P)= Card(Syl_p(G)) = n_p(G) &= [G : Stab_G(P) ] \\ 
+		 &= \frac{Card(G)}{Card(Stab_G(P))}\\
 \end{align*}
 
+D'où \( n_p(G) \mid Card(G) \), et puisque \( n_p(G) \equiv 1\mod p \), on a \( n_p(G) \mid m \).
 	\end{enumerate}
 \end{proof}
 
