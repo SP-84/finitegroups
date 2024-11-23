@@ -1,6 +1,6 @@
-\documentclass[french]{article}
+\documentclass{article}
 \usepackage[T1]{fontenc} % Font enconding
-\usepackage[french]{babel} % Input encoding in French
+\usepackage[french, english]{babel} % Input encoding in both French and English
 \usepackage{mathtools} % Include math symbols
 \usepackage{amsfonts} % Include font for math symbols
 \usepackage{amsthm} % Change definition layout
@@ -75,8 +75,6 @@
 	type=symbols
 }
 
-
-
 \theoremstyle{definition}
 \newtheorem{definition}[subsubsection]{Définition}
 
@@ -97,12 +95,24 @@
 \theoremstyle{plain}
 \newtheorem*{notation}{Notation}
 
+\theoremstyle{definition}
+\newtheorem{defeng}[subsubsection]{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{thmeng}[subsubsection]{Theorem}
+
+\theoremstyle{plain}
+\newtheorem{propeng}[subsubsection]{Proposition}
+
+
 \title{AMS Autour des p-sous-groupes de Sylow}
 \author{Samy Amara, Gabriel Pitino, et Guillaume Salloum} 
 \date{}
 
 \begin{document}
 \maketitle
+
+\selectlanguage{french}
 \begin{abstract}
 	Le but de cette AMS est d'étudier les théorèmes de Sylow, qui forment une réciproque partielle au théorème de Lagrange.
 	Nous introduirons quelques notions utiles pour enonçer les théorèmes, puis nous en donnerons deux preuves : la première utilise les actions de groupes, tandis que la deuxième se base sur ????  .
@@ -244,11 +254,12 @@ Ainsi \( Card(H) \mid Card(S) = p^{n} \).
 D'après (i) au moins un \( P \in Syl_p(G) \) existe, où \( Card(P) = p^{n} \geq p ^{r} = Card(Q) \).
 Donc \( Q \subseteq P \).
 
-\item Soit \( P \in Syl_{p}({G}) \). Montrons que pour tout \(p\)-sous-groupe \( Q \) de \( G \) on a \( Q \subseteq gPg^{-1} \), c'est-à-dire que \( Q \) est dans un sous-groupe conjugué de \( P \). On procède par disjonction de cas sur \( Q \).
+\item Soit \( P \in Syl_{p}({G}) \). Montrons que pour tout \(p\)-sous-groupe \( Q \) de \( G \) il existe \( g \in G \) tel que \( Q \subseteq gPg^{-1} \), c'est-à-dire que \( Q \) est un sous-groupe conjugué de \( P \). On procède par disjonction de cas sur \( Q \).
 	\par \textit{Supposons que \( Q \) est un p-sous-groupe de Sylow de \( G \) :}\\
 	\( Card(Q) = p^{m}\) pour \( 1 \le m \le n \). Puique \( Card(P) = p^{l}\) pour 
 	\( 1 \le l \le n \) aussi, on a soit \( l \ge m \), soit \( l \le m \). Dans les 
-	deux cas il existe bien un \( g \in G \) tel que \( gPg^{-1} = Q \).
+	deux cas il existe bien un \( g \in G \) tel que 
+	\( gPg^{-1} = Q \) donc à fortiori \( Q \subseteq gPg^{-1} \).
 	
 	\par \textit{Supposons que \( Q \) n'est pas un p-sous-groupe de Sylow de \( G \) :}\\ On considère l'action \( \varphi \) de \( Q \) sur les classes à gauche de \( P \) pour la relation \( \sim_{P} \) de congruence à gauche modulo \( P \) définie comme dans le cours. 
 \begin{align*}
@@ -257,10 +268,11 @@ Donc \( Q \subseteq P \).
 \end{align*}
 
 Soit \( O_{p} \) un orbite de \( gP \). Puisque \( gP \) est partitionné en orbites et que \( Q \) et un \(p\)-groupe, alors \( Card(O_{p}) \) est un diviseur de \( p \). Or le nombre de classes à gauche de \( P \) est \([G : P] = \frac{p^{n}m}{p^{n}} = m  \), qui n'est pas un diviseur de \( p \). \\
-Alors une classe \( \overline{g}P \) est un point fixe pour tout \( q \in Q \), c'est-à-dire que \( \forall q \in Q, \exists \overline{g} \in G, q\overline{g}P = \overline{g}P \). \\
-Donc \( \forall q \in Q, q\overline{g} \in \overline{g}P \). D'où \( \forall q \in Q, q \in \overline{g}P\overline{g^{-1}} \) pour un \( \overline{g} \in G \) soit \(\exists g \in G, Q \subseteq gPg^{-1} \). Donc Q est un sous-groupe conjugué de \( G \).
+Alors une classe \( gP \) est un point fixe pour tout \( q \in Q \), c'est-à-dire que \( \forall q \in Q, \exists g \in G, qgP = gP \). \\
+Donc \( \forall q \in Q, qg \in gP \). D'où \( \forall q \in Q, q \in gPg^{-1} \) pour un \( g \in G \) soit \(\exists g \in G, Q \subseteq gPg^{-1} \).\\ 
+Ainsi dans les deux cas \( Q \) est un sous-groupe conjugué de \( G \).
 
-\item Soit \( P \in Syl_{p}(G) \), et \( \chi \) l'action de conjugaison de \( G \) sur \( Syl_{p}(G) \),
+\item Soit \( P \in Syl_{p}(G) \), et \( \chi \) l'action de conjugaison de \( G \) sur \( Syl_{p}(G) \) :
 \begin{align*}
 	\chi : G \times Syl_{p}(G) &\to Syl_{p}(G) \\
 	(g,P) &\mapsto g.P = gPg^{-1}
@@ -285,15 +297,55 @@ D'où \( n_p(G) \mid Card(G) \), et puisque \( n_p(G) \equiv 1\mod p \), on a \(
 
 \clearpage
 \section{Applications}
-\subsection{Application à la classification des groupes simples finis}
+\subsection{Prouver l'existence d'un sous-groupe normal de \ensuremath{G}}
+
 
 \cite{dummit2003abstract}
 
-\subsection{Example : classifing all groups of order 60 up to isomorphism}
+\selectlanguage{english}
+\subsection{Classifing all groups of a given order n up to isomorphism}
 
+\par In the following part, we will use Sylow's theorem to prove whether a group \( G \) is simple or not. Given the order \( n \) of \( G \) and the simplicity (or not) of \( G \), one can then classify all groups of order \( n \) up to isomorphism. We first define these notions using mainly \cite[p.~103]{dummit2003abstract}.
+
+
+\begin{defeng}[Simple group]
+	A group \( G \) is simple if and only it it has two normal subgroups : 
+	\( \{e_G\} \) and itself.
+\end{defeng}
+
+\par Simple group arise in a similar way to prime numbers in the unique factorization of integers : we can break a group \( G \) into smaller pieces, namely the simple groups, to unravel the structure of \( G \).
+This is precisely the notion of a \textit{composition series}.
+
+\begin{defeng}[Composition series]
+	A composition series of a group \( G \) is a sequence of subgroups \( H_0, \ldots, H_n \) such that :
+	\begin{enumerate}[label = (\roman*)]
+	\item the subgroups are pairwise normal : 
+		\( \forall i \in [\![0,n-1]\!], H_i \triangleleft H_{i+1} \)
+	\item And the pairwise quotient groups, called the \textit{composition factors}, are all simple :
+		\( \forall i \in [\![0,n-1]\!], H_{i+1}/H_{i} \) is a simple group
+
+	\end{enumerate}
+\par In practice, \( n \) is chosen to be as large as possible so that we have
+a maximal number of distinct composition factors. The following theorem which we admit asserts that up to a permutation of the composition factors, a finite group \( G \) has a unique composition series.
+
+\begin{thmeng}[Jordan-Hölder]
+	Every finite group \( G \) has a unique composition series up to a permutation of the composition factors.	
+\end{thmeng}
+\end{defeng}
+
+%\par Using these notions, we can state and prove the following result for \( n = 60 \) :
+
+%\begin{propeng}[Groups of order 60]
+%	There are only two groups of order 60 up to isomorphism: \( A_5 \) and \( Z_{60} \).
+%\end{propeng}
+
+%\begin{proof}
+	
+%\end{proof}
 
 \clearpage
 
+\selectlanguage{french}
 \printbibliography
 
 \end{document}
