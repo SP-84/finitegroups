@@ -1,10 +1,17 @@
+%! TeX program = lualatex
 \documentclass{article}
-\usepackage[T1]{fontenc} % Font enconding
+%\usepackage[T1]{fontenc} % Font enconding
 \usepackage[french, english]{babel} % Input encoding in both French and English
 \usepackage{mathtools} % Include math symbols
 \usepackage{amsfonts} % Include font for math symbols
 \usepackage{amsthm} % Change definition layout
 %\usepackage{amssymb} % Use aleph and beth symbols
+\usepackage{unicode-math} % Use LuaLaTex font engine
+\usepackage{lualatex-math} % See http://daniel.flipo.free.fr/doc/luatex/pdf2lua.pdf
+\setmainfont{TeX Gyre Termes} % Times New Roman clone
+\setsansfont{TeX Gyre Heros}
+\setmonofont{TeX Gyre Cursor}
+\setmathfont{Tex Gyre Termes Math} % Times New Roman clone in math mode
 \usepackage{enumitem} % Modern item enumeration
 \usepackage{csquotes} % Typeset quoted texts in French correctly
 \usepackage[backend=biber,style=alphabetic]{biblatex}
@@ -18,6 +25,7 @@
     linkcolor=blue,
     urlcolor=blue, 
 }
+\usepackage[capitalize]{cleveref} % Refer to specific items in theorems
 \usepackage[toc,nomain,symbols]{glossaries} % Make a list of symbol used in the text 
 \makenoidxglossaries
 \newglossaryentry{G}{
@@ -98,11 +106,31 @@
 \theoremstyle{definition}
 \newtheorem{defeng}[subsubsection]{Definition}
 
-\theoremstyle{theorem}
+\theoremstyle{plain}
 \newtheorem{thmeng}[subsubsection]{Theorem}
 
 \theoremstyle{plain}
 \newtheorem{propeng}[subsubsection]{Proposition}
+
+\Crefname{theorem}{Théorème}{Théorèmes}
+\Crefname{theoremenumi}{Théorème}{Théorèmes}
+\AtBeginEnvironment{theorem}{%
+    \crefalias{enumi}{theoremenumi}%
+    \setlist[enumerate,1]{
+        label={\textit{(\roman*)}},
+        ref={\thetheorem.(\roman*)}
+    }%
+}
+
+\Crefname{lem}{Lemme}{Lemmes}
+\Crefname{lemenumi}{Lemme}{Lemmes}
+\AtBeginEnvironment{lem}{%
+    \crefalias{enumi}{lemenumi}%
+    \setlist[enumerate,1]{
+        label={\textit{(\roman*)}},
+        ref={\thelem.(\roman*)}
+    }%
+}
 
 
 \title{AMS Autour des p-sous-groupes de Sylow}
@@ -191,15 +219,14 @@ Nous enonçons en premier lieu quelques définitions issues de l'énoncé du suj
 Plusieurs formulations sont possibles pour les théorèmes, 
 nous avons décidé d'adapter celle de l'énoncé du sujet directement en ajoutant un dernier point issu de \cite[p.~215]{chen2024napkin}.
 
-\begin{theorem}[Théorèmes de Sylow]
+\begin{theorem}[Théorèmes de Sylow]\label{theorem:S}
 	Soit \( G \) un groupe d'ordre \( p^{n}m \) où \( p \) est un nombre premier, \( m \) et \( p \) sont premiers entre eux. Alors on a :
 	\begin{enumerate}[label={\upshape(\roman*)}]
-		\item (Existence) Au moins un p-sous-groupe de Sylow existe, c'est-à-dire que \( n_{p}(G) \geq 1 \) et \( Syl_{p}(G) \neq \emptyset \).
-		\item Tout sous-groupe de \( G \) d'ordre \( p^{r} \) avec \( 0 \leq r \leq n \) est inclus dans un p-sous-groupe de Sylow.
-		\item Deux p-sous-groupes de Sylow \( H \) et \( H' \) de \( G \) sont conjugués entre eux, c'est-à-dire il existe \( g \in G \) tel que \( H' = gHg^{-1} = \{ ghg^{-1} \mid h \in H, g \in G \} \). Par conséquent \( H \cong H' \).
-		\item Le nombre de p-sous-groupes de Sylow de G est congru à 1 modulo p, i.e. \( n_{p} \equiv 1 [p] \) ou \( Card(Syl_{p}({G})) = n_{p}(G) = 1 + kp \).
-			On a de plus, pour tout \( P \in Syl_{p}({G}) \), \( n_{p}({G}) = [G : N_{G}({P}) ] \), donc \( m \) est un diviseur de \( n_p({G}) \).
-
+		\item (Existence) Au moins un p-sous-groupe de Sylow existe, c'est-à-dire que \( n_{p}(G) \geq 1 \) et \( Syl_{p}(G) \neq \emptyset \).\label{theorem:S1}
+		\item Tout sous-groupe de \( G \) d'ordre \( p^{r} \) avec \( 0 \leq r \leq n \) est inclus dans un p-sous-groupe de Sylow. \label{theorem:S2}
+		\item Deux p-sous-groupes de Sylow \( H \) et \( H' \) de \( G \) sont conjugués entre eux, c'est-à-dire il existe \( g \in G \) tel que \( H' = gHg^{-1} = \{ ghg^{-1} \mid h \in H, g \in G \} \). Par conséquent \( H \cong H' \).\label{theorem:S3}
+		\item Le nombre de p-sous-groupes de Sylow de G est congru à 1 modulo p, i.e. \( n_{p} \equiv 1 [p] \) ou \( Card(Syl_{p}({G})) = n_{p}(G) = 1 + kp \). 
+			On a de plus, pour tout \( P \in Syl_{p}({G}) \), \( n_{p}({G}) = [G : N_{G}({P}) ] \), donc \( m \) est un diviseur de \( n_p({G}) \).\label{theorem:S4}
 	\end{enumerate}
 
 \end{theorem}
@@ -297,10 +324,28 @@ D'où \( n_p(G) \mid Card(G) \), et puisque \( n_p(G) \equiv 1\mod p \), on a \(
 
 \clearpage
 \section{Applications}
+
+\subsection{Corollaires}
+
+Il est possible de prouver le théorème de Cauchy sans passer par le théorème de Sylow, mais 
+ce dernier a l'avantage que l'on peut en déduire l'autre directement. Nous donnons ici une 
+preuve rapide dûe à \cite{serre1979ens}.
+
+\begin{theorem}[Cauchy]
+	Soit \( G \) un groupe tel que \( p \mid Card(G) \). Alors il existe \( g \in G \) tel que g est d'ordre \( p \).
+\end{theorem}
+
+\begin{proof}
+	Soit \( H \in Syl_p(G) \). Pusique \( p \mid Card(G) \) alors \( H \neq \{e_G\} \). 
+	En prenant un \( h \in H, h \neq e_G \)
+	on a \( h \) est d'ordre \( p^{a} \) où \( a \geq 1 \). 
+	D'où \( h^{p(a-1)} \) est d'ordre \( p \).
+\end{proof}
+
 \subsection{Prouver l'existence d'un sous-groupe normal de \ensuremath{G}}
 
-
-\cite{dummit2003abstract}
+Pour des groupe d'ordre assez petit, d'après \cref{theorem:S4} on peut "forcer" l'existence d'un sous-groupe normal. Dans les autres cas, certaines conditions supplémentaires que l'on énonce ci-dessous permettent de pallier à ce problème.
+\cite[p. ~142]{dummit2003abstract}
 
 \selectlanguage{english}
 \subsection{Classifing all groups of a given order n up to isomorphism}
