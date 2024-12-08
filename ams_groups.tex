@@ -14,18 +14,22 @@
 \setmathfont{Tex Gyre Termes Math} % Times New Roman clone in math mode
 \usepackage{enumitem} % Modern item enumeration
 \usepackage{csquotes} % Typeset quoted texts in French correctly
-\usepackage[backend=biber,style=alphabetic]{biblatex}
+\usepackage[backend=biber,backref=true,style=alphabetic]{biblatex}
 %\usepackage{tikz} % Draw pictures and illustrate examples
 \addbibresource{ams_groups.bib}
+\DefineBibliographyStrings{french}{%
+	backrefpage  = {cité p.}, % for single page number
+	backrefpages = {cité pp.} % for multiple page numbers
+}
+\usepackage[svgnames]{xcolor}
 \usepackage{hyperref} % Select links in table of contents
 \hypersetup{ 
-    colorlinks,
-    citecolor=blue,
-    filecolor=black,
-    linkcolor=blue,
-    urlcolor=blue, 
+    pdfborder={0 0 1},
+    linkbordercolor=red,
+    urlbordercolor=green
 }
 \usepackage[capitalize]{cleveref} % Refer to specific items in theorems
+
 \usepackage[toc,nomain,symbols]{glossaries} % Make a list of symbol used in the text 
 \makenoidxglossaries
 \newglossaryentry{G}{
@@ -82,6 +86,12 @@
 	description={Stabilisateur de \ensuremath{x} dans \ensuremath{G}},
 	type=symbols
 }
+\newglossaryentry{zmultiplicative}{
+	name={\ensuremath{Z_n}},
+	sort=10,
+	description={Groupe cyclique d'ordre \ensuremath{n}},
+	type=symbols
+}
 
 \theoremstyle{definition}
 \newtheorem{definition}[subsubsection]{Définition}
@@ -100,9 +110,6 @@
 \theoremstyle{plain}
 \newtheorem{remark}[subsubsection]{Remarque}
 
-\theoremstyle{plain}
-\newtheorem*{notation}{Notation}
-
 \theoremstyle{definition}
 \newtheorem{defeng}[subsubsection]{Definition}
 
@@ -111,27 +118,10 @@
 
 \theoremstyle{plain}
 \newtheorem{propeng}[subsubsection]{Proposition}
+\crefalias{thmeng}{Theorem}
 
-\Crefname{theorem}{Théorème}{Théorèmes}
-\Crefname{theoremenumi}{Théorème}{Théorèmes}
-\AtBeginEnvironment{theorem}{%
-    \crefalias{enumi}{theoremenumi}%
-    \setlist[enumerate,1]{
-        label={\textit{(\roman*)}},
-        ref={\thetheorem.(\roman*)}
-    }%
-}
-
-\Crefname{lem}{Lemme}{Lemmes}
-\Crefname{lemenumi}{Lemme}{Lemmes}
-\AtBeginEnvironment{lem}{%
-    \crefalias{enumi}{lemenumi}%
-    \setlist[enumerate,1]{
-        label={\textit{(\roman*)}},
-        ref={\thelem.(\roman*)}
-    }%
-}
-
+\DeclareMathOperator{\Gal}{Gal} % Use galois group notation
+\DeclareMathOperator{\Aut}{Aut} % Use automorphism subgroup notation
 
 \title{AMS Autour des p-sous-groupes de Sylow}
 \author{Samy Amara, Gabriel Pitino, et Guillaume Salloum} 
@@ -143,7 +133,7 @@
 \selectlanguage{french}
 \begin{abstract}
 	Le but de cette AMS est d'étudier les théorèmes de Sylow, qui forment une réciproque partielle au théorème de Lagrange.
-	Nous introduirons quelques notions utiles pour enonçer les théorèmes, puis nous en donnerons deux preuves : la première utilise les actions de groupes, tandis que la deuxième se base sur ????  .
+	Nous introduirons quelques notions utiles pour enonçer les théorèmes, puis nous en donnerons une preuve utilisant en grande partie les actions de groupes.
 	Enfin nous en donnerons quelques applications, notemment pour la classification des groupes simples finis.% et en théorie de la représentation ?
 \end{abstract}
 
@@ -222,18 +212,18 @@ nous avons décidé d'adapter celle de l'énoncé du sujet directement en ajouta
 \begin{theorem}[Théorèmes de Sylow]\label{theorem:S}
 	Soit \( G \) un groupe d'ordre \( p^{n}m \) où \( p \) est un nombre premier, \( m \) et \( p \) sont premiers entre eux. Alors on a :
 	\begin{enumerate}[label={\upshape(\roman*)}]
-		\item (Existence) Au moins un p-sous-groupe de Sylow existe, c'est-à-dire que \( n_{p}(G) \geq 1 \) et \( Syl_{p}(G) \neq \emptyset \).\label{theorem:S1}
-		\item Tout sous-groupe de \( G \) d'ordre \( p^{r} \) avec \( 0 \leq r \leq n \) est inclus dans un p-sous-groupe de Sylow. \label{theorem:S2}
-		\item Deux p-sous-groupes de Sylow \( H \) et \( H' \) de \( G \) sont conjugués entre eux, c'est-à-dire il existe \( g \in G \) tel que \( H' = gHg^{-1} = \{ ghg^{-1} \mid h \in H, g \in G \} \). Par conséquent \( H \cong H' \).\label{theorem:S3}
+		\item (Existence) Au moins un p-sous-groupe de Sylow existe, c'est-à-dire que \( n_{p}(G) \geq 1 \) et \( Syl_{p}(G) \neq \emptyset \).\label{S1}
+		\item Tout sous-groupe de \( G \) d'ordre \( p^{r} \) avec \( 0 \leq r \leq n \) est inclus dans un p-sous-groupe de Sylow. \label{S2}
+		\item Deux p-sous-groupes de Sylow \( H \) et \( H' \) de \( G \) sont conjugués entre eux, c'est-à-dire il existe \( g \in G \) tel que \( H' = gHg^{-1} = \{ ghg^{-1} \mid h \in H, g \in G \} \). Par conséquent \( H \cong H' \).\label{S3}
 		\item Le nombre de p-sous-groupes de Sylow de G est congru à 1 modulo p, i.e. \( n_{p} \equiv 1 [p] \) ou \( Card(Syl_{p}({G})) = n_{p}(G) = 1 + kp \). 
-			On a de plus, pour tout \( P \in Syl_{p}({G}) \), \( n_{p}({G}) = [G : N_{G}({P}) ] \), donc \( m \) est un diviseur de \( n_p({G}) \).\label{theorem:S4}
+			On a de plus, pour tout \( P \in Syl_{p}({G}) \), \( n_{p}({G}) = [G : N_{G}({P}) ] \), donc \( m \) est un diviseur de \( n_p({G}) \).\label{S4}
 	\end{enumerate}
 
 \end{theorem}
 
-\subsection{Première démonstration}
+\subsection{Démonstration}
 
-\par La première preuve est due à \cite[p.~216-218]{chen2024napkin}, nous l'avons reformulée et avons explicité certains détails supplémentaires pour plus de clarté dans la présentation.
+\par Cette preuve est due à \cite[p.~216-218]{chen2024napkin}, nous l'avons reformulée et avons explicité certains détails supplémentaires pour plus de clarté dans la présentation.
 \begin{proof}
 	\begin{enumerate}[label={\upshape(\roman*)}]
 		\item 
@@ -318,39 +308,60 @@ D'où \( n_p(G) \mid Card(G) \), et puisque \( n_p(G) \equiv 1\mod p \), on a \(
 	\end{enumerate}
 \end{proof}
 
+\begin{remark}
+	Il existe d'autres preuves utilisant des arguments similaires à ceux que nous avons exposés, comme par exemple celle de \cite[p.~ 140-141]{dummit2003abstract}. 
 
-\subsection{Deuxième démonstration}
-
+	Mentionnons aussi les théorèmes de Hall qui généralisent ceux de Sylow (nous avons choisi de ne pas les exposer car cela dépasse le cadre du sujet) dont on peut trouver une présentation dans \cite[p.~ 40-44]{serre1979ens}.
+\end{remark}
 
 \clearpage
+\selectlanguage{english}
 \section{Applications}
 
-\subsection{Corollaires}
+\subsection{Some corollaries}
 
-Il est possible de prouver le théorème de Cauchy sans passer par le théorème de Sylow, mais 
-ce dernier a l'avantage que l'on peut en déduire l'autre directement. Nous donnons ici une 
-preuve rapide dûe à \cite{serre1979ens}.
+One can prove Cauchy's theorem without using Sylow's theorem, however the latter has an advantage in the sense that it can be used to prove the former. We give a quick proof here due to \cite{serre1979ens}.
 
-\begin{theorem}[Cauchy]
-	Soit \( G \) un groupe tel que \( p \mid Card(G) \). Alors il existe \( g \in G \) tel que g est d'ordre \( p \).
-\end{theorem}
+\begin{thmeng}[Cauchy]
+	Let \( G \) be a group such that \( p \mid Card(G) \). Then there exists some \( g \in G \) such that \( g \) has order \( p \).
+\end{thmeng}
 
 \begin{proof}
-	Soit \( H \in Syl_p(G) \). Pusique \( p \mid Card(G) \) alors \( H \neq \{e_G\} \). 
-	En prenant un \( h \in H, h \neq e_G \)
-	on a \( h \) est d'ordre \( p^{a} \) où \( a \geq 1 \). 
-	D'où \( h^{p(a-1)} \) est d'ordre \( p \).
+	Let \( H \in Syl_p(G) \). Since \( p \mid Card(G) \) then \( H \neq \{e_G\} \). 
+	Picking \( h \in H, h \neq e_G \)
+	then \( h \)  has order \( p^{a} \) with \( a \geq 1 \). 
+	Hence \( h^{p(a-1)} \) has order \( p \).
 \end{proof}
 
-\subsection{Prouver l'existence d'un sous-groupe normal de \ensuremath{G}}
+\subsection{Proving that there exists a normal subgroup of \ensuremath{G}}
 
-Pour des groupe d'ordre assez petit, d'après \cref{theorem:S4} on peut "forcer" l'existence d'un sous-groupe normal. Dans les autres cas, certaines conditions supplémentaires que l'on énonce ci-dessous permettent de pallier à ce problème.
-\cite[p. ~142]{dummit2003abstract}
+Given groups of small order one can force the existence of a normal subgroup in certain cases. We give one of the following :
 
-\selectlanguage{english}
+\begin{proposition}\label{primes}
+	Let \( G \) be a group such that \( Card(G) = pq \) with \( p,q \) primes such that \( p < q \). Given two Sylow subgroups \( P \) and \( Q \) with \( Card(P) = p^{n} \) and \( Card(Q) = q^{m} \) \( (n, m \geq 0) \) then \( Q \triangleleft G \). 
+	Moreover if \( P \triangleleft G \), \( G \) is cyclic.
+\end{proposition}
+
+\begin{proof}
+	Since \( n_q(G) = 1 + kq, k > 0 \) and \( Q \) is a subgroup of \( G \), then \( P \) and \( Q \) are conjugate subgroups of \( G \) by theorem \ref{theorem:S}. Moreover \( n_q(G) \) divides \( p \), that is to say \( p = n_q(G) \times a \) for some \( a \in \mathbb{N} \).
+	But \( p < q \) so \( p = (1 + kq)\times a \). \\
+	If \( k \geq 1, p = (a + kqa) > q \) which is impossible. Hence \( k = 0 \).
+	Thus \( n_q(G) = 1 \) i.e. \( [G : N_G(Q)] = 1 \) so \( N_G(Q) = Q \).
+	Hence \( Q \triangleleft G \). 
+
+	Now suppose \( P \) is normal in \( G \), let \( P = \langle x \rangle \) and \( Q = \langle y \rangle \).
+
+	We have \( C_G(P) = \{ g \in G \mid gpg^{-1} = p, \forall p \in P\} \) i.e. the \textit{centraliser of P in G}.
+	There exists a subgroup \( H \) of \( \Aut({\mathbb{Z}_{q}}) \) the set of bijections of \( \mathbb{Z}_{q} \) onto \( \mathbb{Z}_{q} \) of order \( q-1 \) such that \( G/C_G(P) \) is isomorphic to \( H \). \\
+	Since \( q \) does not divide \( p-1 \) and \( q \) does not divide \( p-1 \), then by Lagrange's theorem we have \( G = C_G(P) \). 
+	So \( P \) is a subgroup of the center of \( G \), hence \( xy = yx \). The order of
+	\( xy \) is equal to \( pq \).
+	Thus \( G \) is isomorphic to \( \mathbb{Z}_{pq} \) and \( G \) is cyclic.
+\end{proof}
+
 \subsection{Classifing all groups of a given order n up to isomorphism}
 
-\par In the following part, we will use Sylow's theorem to prove whether a group \( G \) is simple or not. Given the order \( n \) of \( G \) and the simplicity (or not) of \( G \), one can then classify all groups of order \( n \) up to isomorphism. We first define these notions using mainly \cite[p.~103]{dummit2003abstract}.
+\par One can use Sylow's theorem to prove whether a group \( G \) is simple or not. Given the order \( n \) and the simplicity of \( G \), one can then classify all groups of order \( n \) up to isomorphism. We first define these notions using mainly \cite[p.~103]{dummit2003abstract}.
 
 
 \begin{defeng}[Simple group]
@@ -358,16 +369,16 @@ Pour des groupe d'ordre assez petit, d'après \cref{theorem:S4} on peut "forcer"
 	\( \{e_G\} \) and itself.
 \end{defeng}
 
-\par Simple group arise in a similar way to prime numbers in the unique factorization of integers : we can break a group \( G \) into smaller pieces, namely the simple groups, to unravel the structure of \( G \).
+\par Simple group arise in a similar way to prime numbers in the unique factorization of integers : we can break down a group \( G \) into smaller pieces, namely the simple groups, to unravel the structure of \( G \).
 This is precisely the notion of a \textit{composition series}.
 
 \begin{defeng}[Composition series]
 	A composition series of a group \( G \) is a sequence of subgroups \( H_0, \ldots, H_n \) such that :
 	\begin{enumerate}[label = (\roman*)]
 	\item the subgroups are pairwise normal : 
-		\( \forall i \in [\![0,n-1]\!], H_i \triangleleft H_{i+1} \)
-	\item And the pairwise quotient groups, called the \textit{composition factors}, are all simple :
-		\( \forall i \in [\![0,n-1]\!], H_{i+1}/H_{i} \) is a simple group
+		\( H_i \triangleleft H_{i+1} \) for \( 0 \leq i \leq n-1 \)
+	\item the pairwise quotient groups, called the \textit{composition factors}, are all simple :
+		\( H_{i+1}/H_{i} \) is a simple group for \( 0 \leq i \leq n-1 \)
 
 	\end{enumerate}
 \par In practice, \( n \) is chosen to be as large as possible so that we have
@@ -378,6 +389,20 @@ a maximal number of distinct composition factors. The following theorem which we
 \end{thmeng}
 \end{defeng}
 
+\par We study the case \( Card(G) = 10 \). We will prove that up to isomorphism there are only two groups of order 10 : \( \mathbb{Z}_{10} \) and \( D_5 \) the dihedral group of order 10, which is defined as follows :
+
+\begin{definition}[Dihedral group]
+	The dihedral group \( D_2n \) is the group generated by rotations and symmetries in a regular \(n\)-gon, that is to say 
+	\begin{equation*}
+		D_{2n} = \langle r,s \mid r^{n} = s^{2} = e, rs = sr^{-1} \rangle 
+	\end{equation*}
+\end{definition}
+
+\begin{proof}
+	Let \( G \) be of order 10. We break down in two cases : either \( G \) is simple or not. We will prove that if \( G \) is simple then \( G \cong D_10 \) and otherwise \( G \cong \mathbb{Z}_{10} \).
+
+	Observe that \( Card(G) = 10 = 2 \times 5 \) with primes \( 2 < 5\), so by \cref{primes} given \( Q \in Syl_5(G) \) then \( Q \triangleleft G \) (or we can say that since \( [G:Q] = 2 \) then \( Q \triangleleft G \)).
+\end{proof} 
 %\par Using these notions, we can state and prove the following result for \( n = 60 \) :
 
 %\begin{propeng}[Groups of order 60]
