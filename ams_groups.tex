@@ -82,8 +82,14 @@
 }
 \newglossaryentry{stabilizer}{
 	name={\ensuremath{Stab_{G}(x)}},
-	sort=4,
+	sort=5,
 	description={Stabilisateur de \ensuremath{x} dans \ensuremath{G}},
+	type=symbols
+}
+\newglossaryentry{orbit}{
+	name={\ensuremath{O_x}},
+	sort=4,
+	description={Orbite de \ensuremath{x} pour l'action de \ensuremath{G}},
 	type=symbols
 }
 \newglossaryentry{zmultiplicative}{
@@ -156,14 +162,14 @@ Dans tout ce qui suit, nous utiliserons les notations suivantes :
 
 %\par Une idée récurrente en mathématiques est d'étudier comment un objet \textit{agit} sur un autre afin d'obtenir plus d'informations sur les deux. C'est précisement le cas lorsque l'on considère un groupe \( G \) agissant sur un ensemble \( A \).
 
-\begin{definition}[Action de groupe, chapitre 1 du cours]
-	Soit \( G \) un groupe et \( A \) un ensemble quelconque. Une \textit{action à gauche} de \( G \) sur \( A \) est une application \( f : G \times A \rightarrow A\) qui satisfait :
+\begin{definition}[Action de groupe]
+	Soit \( G \) un groupe et \( A \) un ensemble non vide. Une \textit{action à gauche} de \( G \) sur \( A \) est une application \( f : G \times A \rightarrow A\) qui satisfait :
 	\begin{enumerate}[label = (\roman*)]
 		\item \(g1.(g2.a) = (g1g2).a \) pour tout \(g1,g2 \in G\), \(a \in A\),
-		\item \(1.a = a\) pour tout \(a \in A\)
+		\item \(e_G.a = a\) pour tout \(a \in A\)
 	\end{enumerate}
 
-	On peut définir de manière équivalente d'après le chapitre 1 du cours une action comme un morphisme \( \varphi : G \rightarrow S_{A} \) de G dans le groupe des permutations de A satisfaisant :
+	On peut définir de manière équivalente d'après le cours une action comme un morphisme \( \varphi : G \rightarrow S_{A} \) de G dans le groupe des permutations de A satisfaisant :
 	\begin{equation}
 		g.a = \varphi(g)(a) \quad \forall g \in G, \forall a \in A
 	\end{equation}
@@ -179,9 +185,14 @@ Un exemple important d'action de \( G \) sur un ensemble \( A \) que nous allons
 	(g,a) &\mapsto a^{g} \coloneq gag^{-1}
 \end{align*}
 
+Le résultat suivant a été démontré en cours.  
+\begin{proposition}[Bijection entre \ensuremath{G/Stab_G(x)} et \ensuremath{O_x}]\label{prop:bij}
+	Soit \( G \) un groupe, \( \varphi : G \times A \rightarrow A \) une action à gauche de \( G \) sur \( A \) et \( x \in A \). Alors \( G/Stab_G(x) \) et \( O_x \) sont en bijection.
+\end{proposition}
+
 \begin{definition}[Normalisateur de \ensuremath{H} dans \ensuremath{G}]\cite[p.~217]{chen2024napkin}.
 	Le normalisateur de \( H \) dans \( G \) est l'ensemble 
-	\( N_{G}({H}) \coloneq \{ g \in G \mid gPg^{-1} = P \} \).
+	\( N_{G}({H}) \coloneq \{ g \in G \mid gHg^{-1} = H \} \).
 	De manière équivalente, c'est le stabilisateur de \( H \) sous l'action de conjugaison de \( G \) sur l'ensemble de ses sous-groupes.
 \end{definition}
 
@@ -192,10 +203,51 @@ Un exemple important d'action de \( G \) sur un ensemble \( A \) que nous allons
 	En d'autres termes, \( A \) et \( B \) sont dans le même orbite pour l'action de conjugaison. Si \( A \) et \( B \) sont des sous-groupes de \( G \), ce sont des \textit{sous-groupes conjugués} de \( G \).
 \end{definition}
 
+On utilise le résultat suivant issu de \cite{fine1947binomial} dans la preuve du point \ref{S1} du théorème de Sylow.
+
+\begin{lemma}[Théorème de Lucas]\label{thm:lucas}
+	Soit \( p \) un nombre premier, \( n,k \in \mathbb{N} \) tels que :
+	\begin{align*}
+		m &= \sum_{i=0}^{r} M_{i}p^{i} &(0 \leq M_i < p)\\
+		n &= \sum_{i=0}^{r} N_{i}p^{i} &(0 \leq N_i < p)
+	\end{align*}
+	On a la relation de congruence suivante :
+	\begin{equation*}
+		\binom{n}{m} = \prod_{i=0}^{r} \binom{n_i}{k_i} \mod p 
+	\end{equation*}
+\end{lemma}
+
+\begin{proof}
+	Si \( p \) est un nombre premier et \( n \in \mathbb{N}\) tel que \( 1 \leq n \leq p-1 \), alors le numérateur du coefficient binomial 
+\begin{equation*}
+	\binom{p}{n} = \frac{p \cdot (p-1) \cdot \ldots \cdot (p-n+1)}{n \cdot (n-1) \cdot \ldots \cdot 1}
+\end{equation*}
+est divisible par \( p \), mais le dénominateur ne l'est pas. D'où \( p \) divise \( \binom{p}{n} \). On en déduit : 
+\begin{equation*}
+	(1 + X)^p \equiv 1 + X^p \mod{p}
+\end{equation*}
+Par récurrence, on a alors pour tout \( i \in \mathbb{N} \)
+\begin{equation*}
+	(1 + X)^{p^i} \equiv 1 + X^{p^i} \mod{p}
+\end{equation*}
+Soit \( m \in \mathbb{N}\) et \( p \) un nombre premier. 
+En écrivant \( m \) en base \( p \) 
+\begin{equation*}
+	m = \sum_{i=0}^{k} m_i p^i
+\end{equation*}
+avec \( k \in \mathbb{N} \) et \( m_i \in \mathbb{N} \) tels que \( 0 \leq m_i \leq p-1 \), on a : 
+
+\begin{align*}
+	\sum_{n=0}^{m} \binom{m}{n} X^n &= (1+X)^m = \prod_{i=0}^{k} \left((1+X)^{p^i}\right)^{m_i} \\
+&\equiv \prod_{i=0}^{k} \left(1 + X^{p^i}\right)^{m_i} = \prod_{i=0}^{k} \left(\sum_{j_i=0}^{m_i} \binom{m_i}{j_i} X^{j_i p^i}\right) \\
+&= \prod_{i=0}^{k} \left(\sum_{j_i=0}^{p-1} \binom{m_i}{j_i} X^{j_i p^i}\right) \\
+&= \sum_{n=0}^{m} \left(\prod_{i=0}^{k} \binom{m_i}{n_i}\right) X^n \pmod{p},
+\end{align*}
+\end{proof}
 
 \subsection{Enoncé}
 
-Nous enonçons en premier lieu quelques définitions issues de l'énoncé du sujet (ou de manière équivalente de \cite[p. ~123 et 139]{dummit2003abstract} utiles pour poser le théorème.
+\par Nous enonçons en premier lieu une définition issue de l'énoncé du sujet (ou de manière équivalente de \cite[p. ~123 et 139]{dummit2003abstract}) utile pour poser le théorème.
 
 \begin{definition}[\ensuremath{p}-groupe]
 	Soit \( G \) un groupe et \( p \) un nombre premier.
@@ -206,48 +258,48 @@ Nous enonçons en premier lieu quelques définitions issues de l'énoncé du suj
 	\end{enumerate}
 \end{definition}
 
-Plusieurs formulations sont possibles pour les théorèmes, 
-nous avons décidé d'adapter celle de l'énoncé du sujet directement en ajoutant un dernier point issu de \cite[p.~215]{chen2024napkin}.
+Plusieurs formulations pour les théorèmes sont possibles, nous avons décidé d'adapter celle de l'énoncé du sujet en ajoutant un dernier point issu de \cite[p.~215]{chen2024napkin}.
 
 \begin{theorem}[Théorèmes de Sylow]\label{theorem:S}
-	Soit \( G \) un groupe d'ordre \( p^{n}m \) où \( p \) est un nombre premier, \( m \) et \( p \) sont premiers entre eux. Alors on a :
+	Soit \( G \) un groupe d'ordre \( p^{n}m \), \( p \) un nombre premier tel que \( m \) et \( p \) sont premiers entre eux. Alors on a :
 	\begin{enumerate}[label={\upshape(\roman*)}]
-		\item (Existence) Au moins un p-sous-groupe de Sylow existe, c'est-à-dire que \( n_{p}(G) \geq 1 \) et \( Syl_{p}(G) \neq \emptyset \).\label{S1}
+		\item (Existence) Au moins un p-sous-groupe de Sylow existe, c'est-à-dire \( n_{p}(G) \geq 1 \) et \( Syl_{p}(G) \neq \emptyset \).\label{S1}
 		\item Tout sous-groupe de \( G \) d'ordre \( p^{r} \) avec \( 0 \leq r \leq n \) est inclus dans un p-sous-groupe de Sylow. \label{S2}
-		\item Deux p-sous-groupes de Sylow \( H \) et \( H' \) de \( G \) sont conjugués entre eux, c'est-à-dire il existe \( g \in G \) tel que \( H' = gHg^{-1} = \{ ghg^{-1} \mid h \in H, g \in G \} \). Par conséquent \( H \cong H' \).\label{S3}
-		\item Le nombre de p-sous-groupes de Sylow de G est congru à 1 modulo p, i.e. \( n_{p} \equiv 1 [p] \) ou \( Card(Syl_{p}({G})) = n_{p}(G) = 1 + kp \). 
-			On a de plus, pour tout \( P \in Syl_{p}({G}) \), \( n_{p}({G}) = [G : N_{G}({P}) ] \), donc \( m \) est un diviseur de \( n_p({G}) \).\label{S4}
+		\item Deux p-sous-groupes de Sylow \( P \) et \( Q \) de \( G \) sont conjugués entre eux : il existe \( g \in G \) tel que \( Q = gPg^{-1} = \{ gxg^{-1} \mid x \in P, g \in G \} \). Par conséquent \( P \cong Q \).\label{S3}
+		\item Le nombre de p-sous-groupes de Sylow de G est donné par \( n_{p} \equiv 1 [p] \). De plus, pour tout \( P \in Syl_{p}({G}) \), \( n_{p}({G}) = [G : N_{G}({P}) ] \), donc \( m \) est un diviseur de \( n_p({G}) \).\label{S4}
 	\end{enumerate}
 
 \end{theorem}
 
 \subsection{Démonstration}
 
-\par Cette preuve est due à \cite[p.~216-218]{chen2024napkin}, nous l'avons reformulée et avons explicité certains détails supplémentaires pour plus de clarté dans la présentation.
+Cette preuve est due à \cite[p.~216-218]{chen2024napkin}. Nous avons explicité certains détails supplémentaires pour plus de clarté dans la présentation.
 \begin{proof}
 	\begin{enumerate}[label={\upshape(\roman*)}]
-		\item 
-Soit
+	\item Soit
 \begin{align*}
 	\varphi : G \times X &\to X \\
 	(g,x) &\mapsto \varphi(g,x) \coloneq g.x
 \end{align*}
 
-une action de \( G \) sur \( X \), où \( X \) est l'ensemble des parties de \( G \) de cardinal \( p^{n} \). En utilisant un résultat de théorie des nombres (théorème de Lucas) que l'on admet, on a :
+une action de \( G \) sur \( X \), où \( X \) désigne l'ensemble des parties de \( G \) de cardinal \( p^{n} \). En utilisant le théorème \ref{thm:lucas} avec 
 
+\begin{equation*}
+	\binom{p^{n}m}{p^{n}} = \prod_{i=0}^{n} \binom{n_i}{k_i} = \prod_{i=0}^{n} \binom{m}{1} = m \not\equiv 0 \mod p
+\end{equation*}
+
+où \( 0 \leq m \leq p-1 \), on en déduit que 
 \begin{align*}
-	Card(X) = \binom{p^{n}m}{p^{n}} \not\equiv 0 \mod  p 
+	Card(X) = \binom{p^{n}m}{p^{n}} \not\equiv 0 \mod p 
 \end{align*}
 
-
 En d'autres termes \( Card(X) \) n'est pas un multiple de \( p \).
-Soit \( O \) une orbite de \( X \) sous l'action \( \varphi \) telle que \( p \) ne divise pas \( Card(O) \). Soit \( S \in O \) et \( H = Stab_{G}({S}) = \{ g \in G \mid g.S = S \} \). \\
-Montrons que \( Card(H) = p^{n} \) en montrant qu'on a à la fois \( Card(H) \mid p^{n} \) et \( p^{n} \mid Card(H) \).
+Soit \( O \) une orbite de \( X \) sous \( \varphi \) telle que \( p \) ne divise pas \( Card(O) \). Soit \( S \in O \), on pose \( H = Stab_{G}({S}) = \{ g \in G \mid g.S = S \} \).
+On prouve que \( Card(H) = p^{n} \) en montrant qu'on a à la fois \( Card(H) \) divise \( p^{n} \) et \( p^{n} \) divise \(Card(H) \).
 
-\par Montrons d'abord que \( Card(H) \mid p^{n} \). \( G \) est fini et on a une bijection entre \( O_x \) et \( G/H \), alors \( Card(O_{x}) = [G : H]  = \frac{Card(G)}{Card(H)} \).
-On en déduit que \( p^{n} \mid Card(H) \), car sinon \( Card(X) \) pourrait être un multiple de \( p \).
+\par Montrons d'abord que \( Card(H) \) divise \( p^{n} \). \( G \) est fini et on a une bijection entre \( O \) et \( G/H \) par le résultat \ref{prop:bij} du cours. On a donc \( Card(O) = [G : H]  = \frac{Card(G)}{Card(H)} \). On en déduit que \( p^{n} \) divise \( Card(H) \).
 
-\par Réciproquement, montrons que \( p^{n} \mid Card(H) \). Soit une nouvelle action :
+\par Réciproquement, montrons que \( p^{n} \) divise \(Card(H)\). Soit une nouvelle action :
 \begin{align*}
 	\psi : H \times S &\to S \\
 	(h,s) &\mapsto h.s
@@ -256,38 +308,55 @@ On en déduit que \( p^{n} \mid Card(H) \), car sinon \( Card(X) \) pourrait êt
 Or pour \( s \in S \) fixé, on a :
 \begin{align*}
 	Stab_{H}({s}) &= \{ h \in H \mid h.s = s \} \\ 
-		      &= \{ h \in \{g \in G \mid g.s = s \} \mid h.s = s \} \text{ par définition de } H\\
+		      &= \{ h \in \{g \in G \mid g.s = s \} \mid h.s = s \} &\text{ par définition de } H\\
 	&= \{e_{G}\} 
 \end{align*}
 
+S est partitionné en orbites que l'on note \( O_s \) où \( s \in S \). On a alors \( S = \bigsqcup_{s \in S} O_{s} \) et \( Card(S) = \sum_{s \in S} Card(O_{s}) \).
+D'après le résultat \ref{prop:bij} du cours, une orbite \( O_s \) de \( S \) sous \( \psi \) est de cardinal \( Card(O_s) = [H : Stab_{H}({s}) ] = Card(H) \) car \( Card(Stab_{H}({s})) = Card(e_{G}) = 1 \). \\
+D'où \( Card(S) = \sum_{s \in S} Card(O_{s}) = \sum Card(H) \).\\ 
+Ainsi \( Card(H) \) divise \( Card(S) = p^{n} \). D'où on a \( Card(H) = p^{n} \).
 
-S est partitionné en orbites que l'on note \( O_y \). On a alors \( S = \bigsqcup O_{y} \) et 
-\( Card(S) = \sum Card(O_{y}) \).
-Par bijection entre \( O_y \) et \( S/Stab_H(s) \), une orbite \( O_y \) de \( S \) sous \( \psi \) est de cardinal \( Card(O_y) = [H : Stab_{H}({s}) ] = Card(H) \) car \( Card(Stab_{H}({s})) = Card(e_{G}) = 1 \). \\
-D'où \( Card(S) = \sum Card(O_{y}) = \sum Card(H) \). \\
-Ainsi \( Card(H) \mid Card(S) = p^{n} \).
-
-\item Soit \( r \in [\![0,n]\!] \), \( Q \) un sous-groupe de \( G \) d'ordre \( p^{r} \). 
+\item Soit \( Q \) un sous-groupe de \( G \) d'ordre \( p^{r} \) avec \( 0 \leq r \leq n \). 
 D'après (i) au moins un \( P \in Syl_p(G) \) existe, où \( Card(P) = p^{n} \geq p ^{r} = Card(Q) \).
 Donc \( Q \subseteq P \).
 
 \item Soit \( P \in Syl_{p}({G}) \). Montrons que pour tout \(p\)-sous-groupe \( Q \) de \( G \) il existe \( g \in G \) tel que \( Q \subseteq gPg^{-1} \), c'est-à-dire que \( Q \) est un sous-groupe conjugué de \( P \). On procède par disjonction de cas sur \( Q \).
-	\par \textit{Supposons que \( Q \) est un p-sous-groupe de Sylow de \( G \) :}\\
-	\( Card(Q) = p^{m}\) pour \( 1 \le m \le n \). Puique \( Card(P) = p^{l}\) pour 
-	\( 1 \le l \le n \) aussi, on a soit \( l \ge m \), soit \( l \le m \). Dans les 
+	\par \textit{Premier cas : supposons que \( Q \) est un p-sous-groupe de Sylow de \( G \) :}\\
+	\( Card(Q) = p^{k}\) pour \( 1 \le k \le n \). Puique \( Card(P) = p^{l}\) pour 
+	\( 1 \le l \le n \) aussi, on a soit \( l \ge k \), soit \( l \le k \). Dans les 
 	deux cas il existe bien un \( g \in G \) tel que 
 	\( gPg^{-1} = Q \) donc à fortiori \( Q \subseteq gPg^{-1} \).
 	
-	\par \textit{Supposons que \( Q \) n'est pas un p-sous-groupe de Sylow de \( G \) :}\\ On considère l'action \( \varphi \) de \( Q \) sur les classes à gauche de \( P \) pour la relation \( \sim_{P} \) de congruence à gauche modulo \( P \) définie comme dans le cours. 
+	\par \textit{Deuxième cas : supposons que \( Q \) n'est pas un p-sous-groupe de Sylow de \( G \) :}\\ On considère l'action \( \varphi \) de \( Q \) sur les classes à gauche de \( P \) pour la relation \( \sim_{P} \) de congruence à gauche modulo \( P \) définie comme dans le cours. 
 \begin{align*}
 	\varphi : Q \times gP &\to gP \\
 	(q,gp) &\mapsto q.gp
 \end{align*}
 
 Soit \( O_{p} \) un orbite de \( gP \). Puisque \( gP \) est partitionné en orbites et que \( Q \) et un \(p\)-groupe, alors \( Card(O_{p}) \) est un diviseur de \( p \). Or le nombre de classes à gauche de \( P \) est \([G : P] = \frac{p^{n}m}{p^{n}} = m  \), qui n'est pas un diviseur de \( p \). \\
-Alors une classe \( gP \) est un point fixe pour tout \( q \in Q \), c'est-à-dire que \( \forall q \in Q, \exists g \in G, qgP = gP \). \\
-Donc \( \forall q \in Q, qg \in gP \). D'où \( \forall q \in Q, q \in gPg^{-1} \) pour un \( g \in G \) soit \(\exists g \in G, Q \subseteq gPg^{-1} \).\\ 
-Ainsi dans les deux cas \( Q \) est un sous-groupe conjugué de \( G \).
+Alors une classe \( gP \) est un point fixe pour tout \( q \in Q \), c'est-à-dire que pour tout \( q \in Q \), il existe \( g \in G \) tel que \( qgP = gP \). 
+Donc pour tout \( q \in Q, qg \in gP \). 
+D'où pour tout \( q \in Q, q \in gPg^{-1} \). Il existe donc \( g \in G, Q \subseteq gPg^{-1} \).\\ 
+Ainsi dans les deux cas \( Q \) est un sous-groupe conjugué de \( G \). 
+De plus, dans le premier cas où \( Q \in Syl_p(G) \), on vérifie que \( \varPsi : P \rightarrow gPg^{-1} \) est un isomorphisme de groupes.
+
+Pour tout \( x_1,x_2 \in P \), on a :
+\begin{align*}
+	\varPsi(x_1x_2) &= gx_1x_2g^{-1} \\
+			&= gx_1e_Gg^{-1} \\
+			&= gx_1g^{-1}gx_2g^{-1} \\
+			&= \varPsi(x_1)\varPsi(x_2) 
+\end{align*}
+
+Donc \( \varPsi \) est un morphisme de groupes. Vérifions que \( \varPsi \) est une bijection.
+\begin{align*}
+	x \in ker(\varPsi) &\iff \varPsi(x) = e_G \\
+			   &\iff gxg^{-1} = e_G \\
+			   &\iff x = e_G
+\end{align*}
+
+Donc \( ker(\varPsi) = e_G \) et \( \varPsi \) est injectif. Soit \( y \in gPg^{-1} \), alors il existe \( x \in P \) tel que \( y = gxg^{-1} \). On a donc \( \varphi(x) = gxg^{-1} = y \). Donc \( \varPsi \) est surjectif. Par conséquent, \( \varPsi \) est un isomorphisme et on a \( P \overset{\varPsi}{\cong} Q \).
 
 \item Soit \( P \in Syl_{p}(G) \), et \( \chi \) l'action de conjugaison de \( G \) sur \( Syl_{p}(G) \) :
 \begin{align*}
@@ -392,7 +461,7 @@ a maximal number of distinct composition factors. The following theorem which we
 \par We study the case \( Card(G) = 10 \). We will prove that up to isomorphism there are only two groups of order 10 : \( \mathbb{Z}_{10} \) and \( D_5 \) the dihedral group of order 10, which is defined as follows :
 
 \begin{definition}[Dihedral group]
-	The dihedral group \( D_2n \) is the group generated by rotations and symmetries in a regular \(n\)-gon, that is to say 
+	The dihedral group \( D_{2n} \) is the group generated by rotations and symmetries in a regular \(n\)-gon, that is to say 
 	\begin{equation*}
 		D_{2n} = \langle r,s \mid r^{n} = s^{2} = e, rs = sr^{-1} \rangle 
 	\end{equation*}
@@ -405,17 +474,21 @@ a maximal number of distinct composition factors. The following theorem which we
 	Moreover by Sylow's Theorem \ref{S4} there are one or five subgroups in \( Syl_2(G) \). In the first case, this subgroup is normal in \( G \) so \( G \) is not simple. \( G \) is generated by elements of order \( 2 \) and \( 5 \) which commute so it is abelian, hence \( G \cong \mathbb{Z}_{10} \). Now in the second case, since \( n_2(G) = 5 \) then \( G \) has 5 elements of order 2 and similarly has 5 elements of order 5. Identifying those with rotations (order 5) and symmetries (order 2) in \( D_{10} \), we get \( G \cong D_{10} \) as desired.
 \end{proof} 
 
+\begin{propeng}[Groups of order 15]
+Let \( G \) be a group of order 15. Then \( G \cong \mathbb{Z}_{15} \).
+\end{propeng}
 
-%\par Using these notions, we can state and prove the following result for \( n = 60 \) :
-
-%\begin{propeng}[Groups of order 60]
-%	There are only two groups of order 60 up to isomorphism: \( A_5 \) and \( Z_{60} \).
-%\end{propeng}
-
-%\begin{proof}
+\begin{proof}
 	
-%\end{proof}
+\end{proof}
 
+\begin{remark}
+	Using these notions, we can state and prove the following result for \( n = 60 \) :
+\begin{propeng}[Groups of order 60]
+	There are only two groups of order 60 up to isomorphism: \( A_5 \) and \( Z_{60} \).
+\end{propeng}
+
+\end{remark}
 \clearpage
 
 \selectlanguage{french}
