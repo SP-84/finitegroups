@@ -140,7 +140,7 @@
 \begin{abstract}
 	Le but de cette AMS est d'étudier les théorèmes de Sylow, qui forment une réciproque partielle au théorème de Lagrange.
 	Nous introduirons quelques notions utiles pour enonçer les théorèmes, puis nous en donnerons une preuve utilisant en grande partie les actions de groupes.
-	Enfin nous en donnerons quelques applications, notemment pour la classification des groupes simples finis.% et en théorie de la représentation ?
+	Enfin nous donnerons quelques applications, notemment pour la classification des groupes finis simples.% et en théorie de la représentation ?
 \end{abstract}
 
 
@@ -156,7 +156,6 @@ Dans tout ce qui suit, nous utiliserons les notations suivantes :
 
 \clearpage
 
-
 \section{Théorèmes de Sylow}
 \subsection{Notions préliminaires}
 
@@ -169,7 +168,7 @@ Dans tout ce qui suit, nous utiliserons les notations suivantes :
 		\item \(e_G.a = a\) pour tout \(a \in A\)
 	\end{enumerate}
 
-	On peut définir de manière équivalente d'après le cours une action comme un morphisme \( \varphi : G \rightarrow S_{A} \) de G dans le groupe des permutations de A satisfaisant :
+	On peut définir de manière équivalente d'après le cours une action de groupe comme un morphisme \( \varphi : G \rightarrow S_{A} \) de G dans le groupe des permutations de A satisfaisant :
 	\begin{equation}
 		g.a = \varphi(g)(a) \quad \forall g \in G, \forall a \in A
 	\end{equation}
@@ -193,14 +192,14 @@ Le résultat suivant a été démontré en cours.
 \begin{definition}[Normalisateur de \ensuremath{H} dans \ensuremath{G}]\cite[p.~217]{chen2024napkin}.
 	Le normalisateur de \( H \) dans \( G \) est l'ensemble 
 	\( N_{G}({H}) \coloneq \{ g \in G \mid gHg^{-1} = H \} \).
-	De manière équivalente, c'est le stabilisateur de \( H \) sous l'action de conjugaison de \( G \) sur l'ensemble de ses sous-groupes.
+	En particulier c'est un sous-groupe de \( G \). De manière équivalente, c'est le stabilisateur de \( H \) sous l'action de conjugaison de \( G \) sur l'ensemble de ses sous-groupes.
 \end{definition}
 
 \begin{definition}[Sous-ensembles conjugués]\cite[p. ~123]{dummit2003abstract} 
 	Soit \( G \) un groupe, \( A \) et \( B \) deux sous-ensembles de \( G \). 
 	\( A \) et \( B \) sont dit 
 	\textit{conjugués dans G} s'il existe \( g \in G \) tel que \( B = gAg^{-1} \).
-	En d'autres termes, \( A \) et \( B \) sont dans le même orbite pour l'action de conjugaison. Si \( A \) et \( B \) sont des sous-groupes de \( G \), ce sont des \textit{sous-groupes conjugués} de \( G \).
+	En d'autres termes, \( A \) et \( B \) sont dans le même orbite pour l'action de conjugaison. De plus si \( A \) et \( B \) sont des sous-groupes de \( G \), ce sont des \textit{sous-groupes conjugués} de \( G \).
 \end{definition}
 
 On utilise le résultat suivant issu de \cite{fine1947binomial} dans la preuve du point \ref{S1} du théorème de Sylow.
@@ -252,13 +251,13 @@ avec \( k \in \mathbb{N} \) et \( m_i \in \mathbb{N} \) tels que \( 0 \leq m_i \
 \begin{definition}[\ensuremath{p}-groupe]
 	Soit \( G \) un groupe et \( p \) un nombre premier.
 	\begin{enumerate}[label = (\roman*)]
-	\item Si \( Card(G) = p^{n} \) pour un \( n > 0 \), \( G \) est un \textit{p-groupe}. Un sous groupe \( H \) de \( G \) est appelé \textit{p-sous groupe}.
-	\item Si \( Card(G) = p^{n}m \) où m n'est pas un multiple de p, alors un sous groupe d'ordre \( p^{n} \) est appelé \textit{p-sous groupe de Sylow de G}.
-	\item L'ensemble des \(p\)-sous groupes de Sylow de \( G \) est noté \( Syl_{p}(G) \), et le nombre de \(p\)-sous groupes de Sylow de \( G \) est noté \( n_{p}(G) \).
+	\item Si \( Card(G) = p^{n} \) pour un \( n > 0 \), \( G \) est un \textit{p-groupe}. Un sous-groupe \( H \) de \( G \) est appelé \textit{p-sous groupe}.
+	\item Si \( Card(G) = p^{n}m \) où m n'est pas un multiple de p, alors un sous-groupe d'ordre \( p^{n} \) est appelé \textit{p-sous-groupe de Sylow de G}.
+	\item L'ensemble des \(p\)-sous-groupes de Sylow de \( G \) est noté \( Syl_{p}(G) \), et le nombre de \(p\)-sous-groupes de Sylow de \( G \) est noté \( n_{p}(G) \).
 	\end{enumerate}
 \end{definition}
 
-Plusieurs formulations pour les théorèmes sont possibles, nous avons décidé d'adapter celle de l'énoncé du sujet en ajoutant un dernier point issu de \cite[p.~215]{chen2024napkin}.
+Plusieurs formulations pour les théorèmes sont possibles, nous avons décidé d'adapter celle de l'énoncé du sujet en ajoutant quelques résultats issus de \cite[p.~215]{chen2024napkin}.
 
 \begin{theorem}[Théorèmes de Sylow]\label{theorem:S}
 	Soit \( G \) un groupe d'ordre \( p^{n}m \), \( p \) un nombre premier tel que \( m \) et \( p \) sont premiers entre eux. Alors on a :
@@ -337,9 +336,9 @@ Donc \( Q \subseteq P \).
 Soit \( O_{p} \) un orbite de \( gP \). Puisque \( gP \) est partitionné en orbites et que \( Q \) et un \(p\)-groupe, alors \( Card(O_{p}) \) est un diviseur de \( p \). Or le nombre de classes à gauche de \( P \) est \([G : P] = \frac{p^{n}m}{p^{n}} = m  \), qui n'est pas un diviseur de \( p \). \\
 Alors une classe \( gP \) est un point fixe pour tout \( q \in Q \), c'est-à-dire que pour tout \( q \in Q \), il existe \( g \in G \) tel que \( qgP = gP \). 
 Donc pour tout \( q \in Q, qg \in gP \). 
-D'où pour tout \( q \in Q, q \in gPg^{-1} \). Il existe donc \( g \in G, Q \subseteq gPg^{-1} \).\\ 
+D'où pour tout \( q \in Q, q \in gPg^{-1} \). Il existe donc \( g \in G \) tel que \( Q \subseteq gPg^{-1} \).\\ 
 Ainsi dans les deux cas \( Q \) est un sous-groupe conjugué de \( G \). 
-De plus, dans le premier cas où \( Q \in Syl_p(G) \), on vérifie que \( \varPsi : P \rightarrow gPg^{-1} \) est un isomorphisme de groupes.
+De plus, dans le premier cas où \( Q \in Syl_p(G) \), montrons que \( \varPsi : P \rightarrow gPg^{-1} \) est un isomorphisme de groupes.
 
 Pour tout \( x_1,x_2 \in P \), on a :
 \begin{align*}
@@ -349,14 +348,16 @@ Pour tout \( x_1,x_2 \in P \), on a :
 			&= \varPsi(x_1)\varPsi(x_2) 
 \end{align*}
 
-Donc \( \varPsi \) est un morphisme de groupes. Vérifions que \( \varPsi \) est une bijection.
+Donc \( \varPsi \) est un morphisme de groupes. Vérifions que \( \varPsi \) est bijectif.
 \begin{align*}
 	x \in ker(\varPsi) &\iff \varPsi(x) = e_G \\
 			   &\iff gxg^{-1} = e_G \\
 			   &\iff x = e_G
 \end{align*}
 
-Donc \( ker(\varPsi) = e_G \) et \( \varPsi \) est injectif. Soit \( y \in gPg^{-1} \), alors il existe \( x \in P \) tel que \( y = gxg^{-1} \). On a donc \( \varphi(x) = gxg^{-1} = y \). Donc \( \varPsi \) est surjectif. Par conséquent, \( \varPsi \) est un isomorphisme et on a \( P \overset{\varPsi}{\cong} Q \).
+Donc \( ker(\varPsi) = \{e_G\} \) et \( \varPsi \) est injectif. 
+
+Soit \( y \in gPg^{-1} \), alors il existe \( x \in P \) tel que \( y = gxg^{-1} \). On a \( \varphi(x) = gxg^{-1} = y \). Donc \( \varPsi \) est surjectif. D'où \( \varPsi \) est un isomorphisme et on a \( P \overset{\varPsi}{\cong} Q \).
 
 \item Soit \( P \in Syl_{p}(G) \), et \( \chi \) l'action de conjugaison de \( G \) sur \( Syl_{p}(G) \) :
 \begin{align*}
@@ -364,68 +365,62 @@ Donc \( ker(\varPsi) = e_G \) et \( \varPsi \) est injectif. Soit \( y \in gPg^{
 	(g,P) &\mapsto g.P = gPg^{-1}
 \end{align*}
 
-Puisque \( P \) est en particulier un \(p\)-groupe, \( n_p(G) \mod p \) est le nombre de points fixes de \( \chi \). Montrons que \( P \) est le seul point fixe de \( \chi \), cela est équivalent à montrer que \( Stab_P(G) = \{ g \in G \mid g.P = gPg^{-1} = P \} = P \) donc que \( N_G(P) = P \) et \( P \triangleleft G \). Soit \( Q \) un autre point fixe de \( \chi \), c'est-à-dire \(Q \in Stab_Q(G) = \{g.Q \mid g.Q = gQg^{-1} = Q \}  \). \\
-Alors \( N_G(Q) = \{ g \in G \mid gQg^{-1} = Q\} \) avec \( P \subset N_G(Q) \) et \( Q \subset N_G(Q) \). \\
-On applique (iii) sur \( N_G(Q) \) : \( P \) et \( Q \) sont des \(p\)-sous-groupes de Sylow de \( N_G(Q) \), donc ce sont des sous-groupes conjugués. D'où \( P = Q \) et \( P \) est le seul point fixe de \( \chi \). On en déduit que \( n_p(G) \equiv 1 \mod p \). \\
-Montrons ensuite que \( m \) est un diviseur de \( n_p(G) \) : d'après ce qui précède, \( \chi \) ne possède qu'un seul orbite \( O_P \) qui est \( Syl_p({G}) \) entier. Puisqu'on a une bijection entre \( O_P \) et \( G/Stab_G(P) \), on en déduit que :
+Puisque \( P \) est en particulier un \(p\)-groupe, \( n_p(G) \mod p \) est le nombre de points fixes de \( \chi \). Montrons que \( P \) est le seul point fixe de \( \chi \), cela est équivalent à montrer que \( Stab_P(G) = \{ g \in G \mid g.P = gPg^{-1} = P \} = P \) donc que \( N_G(P) = P \) et \( P \triangleleft G \). 
+
+Soit \( Q \) un autre point fixe de \( \chi \), on a \(Q \in Stab_Q(G) = \{g.Q \mid g.Q = gQg^{-1} = Q \}  \). Alors \( N_G(Q) = \{ g \in G \mid gQg^{-1} = Q\} \) avec \( P \subset N_G(Q) \) et \( Q \subset N_G(Q) \). \\
+On applique \ref{S3} sur \( N_G(Q) \) : \( P \) et \( Q \) sont des \(p\)-sous-groupes de Sylow de \( N_G(Q) \), donc ce sont des sous-groupes conjugués. D'où \( P = Q \) et \( P \) est le seul point fixe de \( \chi \). On en déduit que \( n_p(G) \equiv 1 \mod p \). \\
+Montrons ensuite que \( m \) est un diviseur de \( n_p(G) \) : d'après ce qui précède, \( \chi \) ne possède qu'un seul orbite \( O_P \) qui est \( Syl_p({G}) \) entier. Puisqu'on a une bijection entre \( O_P \) et \( G/Stab_G(P) \) par \ref{prop:bij}, on en déduit que :
 \begin{align*}
 	Card(O_P)= Card(Syl_p(G)) = n_p(G) &= [G : Stab_G(P) ] \\ 
 		 &= \frac{Card(G)}{Card(Stab_G(P))}\\
 \end{align*}
 
-D'où \( n_p(G) \mid Card(G) \), et puisque \( n_p(G) \equiv 1\mod p \), on a \( n_p(G) \mid m \).
+D'où \( n_p(G) \) divise \( Card(G) \). Or \( Card(G) = p^{n}m \) et \( n_p(G) \equiv 1\mod p \), on en déduit que \( n_p(G) \) divise \( m \).
 	\end{enumerate}
 \end{proof}
 
 \begin{remark}
-	Il existe d'autres preuves utilisant des arguments similaires à ceux que nous avons exposés, comme par exemple celle de \cite[p.~ 140-141]{dummit2003abstract}. 
+	Il existe d'autres preuves utilisant des arguments similaires à ceux que nous avons exposés avec des actions de groupes, comme par exemple celle de \cite[p.~ 140-141]{dummit2003abstract} où l'on retrouve aussi l'équation aux classes.
 
-	Mentionnons aussi les théorèmes de Hall qui généralisent ceux de Sylow (nous avons choisi de ne pas les exposer car cela dépasse le cadre du sujet) dont on peut trouver une présentation dans \cite[p.~ 40-44]{serre1979ens}.
+	Mentionnons aussi les théorèmes de Hall qui généralisent ceux de Sylow dans le cadre des groupes finis solvables (nous avons choisi de ne pas les exposer car cela dépasse le cadre du sujet et les preuves sont plus techniques), dont on peut trouver une présentation dans \cite[p.~ 40-44]{serre1979ens}.
 \end{remark}
 
-\clearpage
 \selectlanguage{english}
 \section{Applications}
 
-\subsection{Some corollaries}
+\subsection{Deducing Cauchy's theorem}
 
-One can prove Cauchy's theorem without using Sylow's theorem, however the latter has an advantage in the sense that it can be used to prove the former. We give a quick proof here due to \cite{serre1979ens}.
+One can prove Cauchy's theorem without using Sylow's theorem, however the latter has an advantage in the sense that it can be used to prove the former. We give a quick proof here due to \cite[p. ~12]{serre1979ens}.
 
 \begin{thmeng}[Cauchy]
 	Let \( G \) be a group such that \( p \) divides \( Card(G) \). Then there exists some \( g \in G \) such that \( g \) has order \( p \).
 \end{thmeng}
 
 \begin{proof}
-	Let \( H \in Syl_p(G) \). Since \( p \mid Card(G) \) then \( H \neq \{e_G\} \). 
-	Picking \( h \in H, h \neq e_G \)
-	then \( h \)  has order \( p^{a} \) with \( a \geq 1 \). 
-	Hence \( h^{p(a-1)} \) has order \( p \).
+	Let \( H \in Syl_p(G) \). Since \( p \) divides \( Card(G) \) then \( H \neq \{e_G\} \). Pick \( h \in H \) such that \( h \neq e_G \), then \( h \) has order \( p^{a} \) with \( a \geq 1 \). Hence \( h^{p^{(a-1)}} \) has order \( p \).
 \end{proof}
 
 \subsection{Proving that there exists a normal subgroup of \ensuremath{G}}
 
-Given groups of small order one can force the existence of a normal subgroup in certain cases. We give one of the following :
+Given groups of small order one can force the existence of a normal subgroup in certain cases. We give one of the following due to \cite[p. ~143]{dummit2003abstract}.
 
 \begin{proposition}\label{primes}
-	Let \( G \) be a group such that \( Card(G) = pq \) with \( p,q \) primes such that \( p < q \). Given two Sylow subgroups \( P \) and \( Q \) with \( Card(P) = p^{n} \) and \( Card(Q) = q^{m} \) \( (n, m \geq 0) \) then \( Q \triangleleft G \). 
-	Moreover if \( P \triangleleft G \), \( G \) is cyclic.
+	Let \( G \) be a group such that \( Card(G) = pq \) for \( p,q \) prime numbers with \( p < q \). Given \( P \in Syl_p(G) \) and \( Q \in Syl_q(G) \) then \( Q \triangleleft G \). If we also have \( P \triangleleft G \), then \( G \) is cyclic.
 \end{proposition}
 
 \begin{proof}
-	Since \( n_q(G) = 1 + kq, k > 0 \) and \( Q \) is a subgroup of \( G \), then \( P \) and \( Q \) are conjugate subgroups of \( G \) by theorem \ref{theorem:S}. Moreover \( n_q(G) \) divides \( p \), that is to say \( p = n_q(G) \times a \) for some \( a \in \mathbb{N} \).
-	But \( p < q \) so \( p = (1 + kq)\times a \). \\
-	If \( k \geq 1, p = (a + kqa) > q \) which is impossible. Hence \( k = 0 \).
-	Thus \( n_q(G) = 1 \) i.e. \( [G : N_G(Q)] = 1 \) so \( N_G(Q) = Q \).
+	By Sylow's theorem \ref{S4}, \( n_q(G) = 1 + kq \) for \( k \in \mathbb{N} \). Moreover \( n_q(G) \) divides \( p \), that is to say \( p = n_q(G).a = (1 + kq). a \) for some \( a \in \mathbb{N} \). 
+	If \( k \geq 1 \) then \( p = (a + kqa) > q \) which is impossible since \( p < q \).
+	Hence \( k = 0 \).
+	Thus \( n_q(G) = 1 \) and \( [G : N_G(Q)] = 1 \), so \( N_G(Q) = G \).
 	Hence \( Q \triangleleft G \). 
 
-	Now suppose \( P \) is normal in \( G \), let \( P = \langle x \rangle \) and \( Q = \langle y \rangle \).
+	Now suppose \( P \triangleleft G \). Let \( P = \langle x \rangle \) and \( Q = \langle y \rangle \).
 
-	We have \( C_G(P) = \{ g \in G \mid gpg^{-1} = p, \forall p \in P\} \) i.e. the \textit{centraliser of P in G}.
-	There exists a subgroup \( H \) of \( \Aut({\mathbb{Z}_{q}}) \) the set of bijections of \( \mathbb{Z}_{q} \) onto \( \mathbb{Z}_{q} \) of order \( q-1 \) such that \( G/C_G(P) \) is isomorphic to \( H \). \\
-	Since \( q \) does not divide \( p-1 \) and \( q \) does not divide \( p-1 \), then by Lagrange's theorem we have \( G = C_G(P) \). 
-	So \( P \) is a subgroup of the center of \( G \), hence \( xy = yx \). The order of
-	\( xy \) is equal to \( pq \).
-	Thus \( G \) is isomorphic to \( \mathbb{Z}_{pq} \) and \( G \) is cyclic.
+	Define the \textit{centralizer of P in G} as the set \( C_G(P) = \{ g \in G \mid gpg^{-1} = p, \forall p \in P\} \). In particular it is a subgroup of \( G \). Recall that \( \Aut({\mathbb{Z}_{p}}) \) is the group of automorphisms of \( \mathbb{Z}_{p} \) of order \( p-1 \).
+	Since \( P \triangleleft G \) there exists a subgroup \( H \) of \( \Aut({\mathbb{Z}_{p}}) \) such that \( G/C_G(P) \) is isomorphic to \( H \). Since \( p \) does not divide \( p-1 \) and \( q \) does not divide \( p-1 \), then by Lagrange's theorem we have \( G = C_G(P) \). In this case \( P \) is a subgroup of \( Z(G)\) the center of \( G \), hence \( xy = yx \). 
+
+	The order of \( xy \) is equal to \( pq \). Thus \( G \) is cyclic and \( G \cong \mathbb{Z}_{pq} \).
 \end{proof}
 
 \subsection{Classifing all groups of a given order n up to isomorphism}
@@ -434,7 +429,7 @@ Given groups of small order one can force the existence of a normal subgroup in 
 
 
 \begin{defeng}[Simple group]
-	A group \( G \) is simple if and only it it has two normal subgroups : 
+	A group \( G \) is simple if and only if it has two normal subgroups : 
 	\( \{e_G\} \) and itself.
 \end{defeng}
 
@@ -458,19 +453,24 @@ a maximal number of distinct composition factors. The following theorem which we
 \end{thmeng}
 \end{defeng}
 
-\par We study the case \( Card(G) = 10 \). We will prove that up to isomorphism there are only two groups of order 10 : \( \mathbb{Z}_{10} \) and \( D_5 \) the dihedral group of order 10, which is defined as follows :
-
-\begin{definition}[Dihedral group]
-	The dihedral group \( D_{2n} \) is the group generated by rotations and symmetries in a regular \(n\)-gon, that is to say 
+\par We first study the case \( Card(G) = 10 \), for which we need the following definition.
+\begin{defeng}[Dihedral group]
+	The dihedral group \( D_{2n} \) of order \( 2n \) is the group generated by rotations and symmetries in a regular \(n\)-gon, which has the presentation 
 	\begin{equation*}
-		D_{2n} = \langle r,s \mid r^{n} = s^{2} = e, rs = sr^{-1} \rangle 
+		D_{2n} = \langle r,s \mid r^{n} = s^{2} = e_{D_{2n}}, rs = sr^{-1} \rangle 
 	\end{equation*}
-\end{definition}
+\end{defeng}
+
+We can now prove the following :
+
+\begin{propeng}[Groups of order 10]
+	There are only two groups of order 10 up to isomorphism : \( \mathbb{Z}_{10} \) the cylic group of order 10 and \( D_{10} \) the dihedral group of order 10.
+\end{propeng}
 
 \begin{proof}
 	Let \( G \) be of order 10. We break down in two cases : either \( G \) is simple or not. We will prove that if \( G \) is simple then \( G \cong D_{10} \) and otherwise \( G \cong \mathbb{Z}_{10} \).
 
-	Observe that \( Card(G) = 10 = 2 \times 5 \) with primes \( 2 < 5\), so by \cref{primes} given \( Q \in Syl_5(G) \) then \( Q \triangleleft G \) (or we can say that since \( [G:Q] = 2 \) then \( Q \triangleleft G \)).
+	Observe that \( Card(G) = 10 = 2 \times 5 \) with primes \( 2 < 5\). By \cref{primes}, given \( Q \in Syl_5(G) \) then \( Q \triangleleft G \) (or we can say that since \( [G:Q] = 2 \) then \( Q \triangleleft G \)).
 	Moreover by Sylow's Theorem \ref{S4} there are one or five subgroups in \( Syl_2(G) \). In the first case, this subgroup is normal in \( G \) so \( G \) is not simple. \( G \) is generated by elements of order \( 2 \) and \( 5 \) which commute so it is abelian, hence \( G \cong \mathbb{Z}_{10} \). Now in the second case, since \( n_2(G) = 5 \) then \( G \) has 5 elements of order 2 and similarly has 5 elements of order 5. Identifying those with rotations (order 5) and symmetries (order 2) in \( D_{10} \), we get \( G \cong D_{10} \) as desired.
 \end{proof} 
 
@@ -479,16 +479,14 @@ Let \( G \) be a group of order 15. Then \( G \cong \mathbb{Z}_{15} \).
 \end{propeng}
 
 \begin{proof}
-	
+	As in the proof of the previous proposition, observe that \( Card(G) = 15 = 3 \times 5 \) with primes \( 3 < 5 \).	
 \end{proof}
 
-\begin{remark}
-	Using these notions, we can state and prove the following result for \( n = 60 \) :
 \begin{propeng}[Groups of order 60]
 	There are only two groups of order 60 up to isomorphism: \( A_5 \) and \( Z_{60} \).
 \end{propeng}
 
-\end{remark}
+
 \clearpage
 
 \selectlanguage{french}
