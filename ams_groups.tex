@@ -168,10 +168,10 @@ Dans tout ce qui suit, nous utiliserons les notations suivantes :
 		\item \(e_G.a = a\) pour tout \(a \in A\)
 	\end{enumerate}
 
-	On peut définir de manière équivalente d'après le cours une action de groupe comme un morphisme \( \varphi : G \rightarrow S_{A} \) de G dans le groupe des permutations de A satisfaisant :
-	\begin{equation}
-		g.a = \varphi(g)(a) \quad \forall g \in G, \forall a \in A
-	\end{equation}
+%	On peut définir de manière équivalente d'après le cours une action de groupe comme un morphisme \( \varphi : G \rightarrow S_{A} \) de G dans le groupe des permutations de A satisfaisant :
+%	\begin{equation}
+%		g.a = \varphi(g)(a) \quad \forall g \in G, \forall a \in A
+%	\end{equation}
 \end{definition}
 
 Un exemple important d'action de \( G \) sur un ensemble \( A \) que nous allons utiliser par la suite est la \textit{conjugaison à gauche}.
@@ -192,8 +192,10 @@ Le résultat suivant a été démontré en cours.
 \begin{definition}[Normalisateur de \ensuremath{H} dans \ensuremath{G}]\cite[p.~217]{chen2024napkin}.
 	Le normalisateur de \( H \) dans \( G \) est l'ensemble 
 	\( N_{G}({H}) \coloneq \{ g \in G \mid gHg^{-1} = H \} \).
-	En particulier c'est un sous-groupe de \( G \). De manière équivalente, c'est le stabilisateur de \( H \) sous l'action de conjugaison de \( G \) sur l'ensemble de ses sous-groupes.
+	En particulier c'est un sous-groupe de \( G \). De manière équivalente, c'est le stabilisateur de \( H \) sous l'action de conjugaison de \( G \) sur l'ensemble de ses sous-groupes. 
 \end{definition}
+
+Ceci permet de caractériser un sous-groupe normal : si \( N_G(H) = G \) alors \( H \triangleleft G \).
 
 \begin{definition}[Sous-ensembles conjugués]\cite[p. ~123]{dummit2003abstract} 
 	Soit \( G \) un groupe, \( A \) et \( B \) deux sous-ensembles de \( G \). 
@@ -202,7 +204,7 @@ Le résultat suivant a été démontré en cours.
 	En d'autres termes, \( A \) et \( B \) sont dans le même orbite pour l'action de conjugaison. De plus si \( A \) et \( B \) sont des sous-groupes de \( G \), ce sont des \textit{sous-groupes conjugués} de \( G \).
 \end{definition}
 
-On utilise le résultat suivant issu de \cite{fine1947binomial} dans la preuve du point \ref{S1} du théorème de Sylow.
+On utilise le résultat suivant issu de \cite{fine1947binomial} dans la preuve du point \ref{S1} des théorèmes de Sylow.
 
 \begin{lemma}[Théorème de Lucas]\label{thm:lucas}
 	Soit \( p \) un nombre premier, \( n,k \in \mathbb{N} \) tels que :
@@ -257,7 +259,7 @@ avec \( k \in \mathbb{N} \) et \( m_i \in \mathbb{N} \) tels que \( 0 \leq m_i \
 	\end{enumerate}
 \end{definition}
 
-Plusieurs formulations pour les théorèmes sont possibles, nous avons décidé d'adapter celle de l'énoncé du sujet en ajoutant quelques résultats issus de \cite[p.~215]{chen2024napkin}.
+Plusieurs formulations pour les théorèmes sont possibles, nous avons adapté celle de l'énoncé du sujet en ajoutant quelques résultats issus de \cite[p.~215]{chen2024napkin}.
 
 \begin{theorem}[Théorèmes de Sylow]\label{theorem:S}
 	Soit \( G \) un groupe d'ordre \( p^{n}m \), \( p \) un nombre premier tel que \( m \) et \( p \) sont premiers entre eux. Alors on a :
@@ -312,7 +314,7 @@ Or pour \( s \in S \) fixé, on a :
 \end{align*}
 
 S est partitionné en orbites que l'on note \( O_s \) où \( s \in S \). On a alors \( S = \bigsqcup_{s \in S} O_{s} \) et \( Card(S) = \sum_{s \in S} Card(O_{s}) \).
-D'après le résultat \ref{prop:bij} du cours, une orbite \( O_s \) de \( S \) sous \( \psi \) est de cardinal \( Card(O_s) = [H : Stab_{H}({s}) ] = Card(H) \) car \( Card(Stab_{H}({s})) = Card(e_{G}) = 1 \). \\
+D'après le résultat \ref{prop:bij} du cours, une orbite \( O_s \) de \( S \) sous \( \psi \) est de cardinal \( Card(O_s) = [H : Stab_{H}({s}) ] = Card(H) \) car \( Card(Stab_{H}({s})) = Card(\{e_{G}\}) = 1 \). \\
 D'où \( Card(S) = \sum_{s \in S} Card(O_{s}) = \sum Card(H) \).\\ 
 Ainsi \( Card(H) \) divise \( Card(S) = p^{n} \). D'où on a \( Card(H) = p^{n} \).
 
@@ -320,9 +322,11 @@ Ainsi \( Card(H) \) divise \( Card(S) = p^{n} \). D'où on a \( Card(H) = p^{n} 
 D'après (i) au moins un \( P \in Syl_p(G) \) existe, où \( Card(P) = p^{n} \geq p ^{r} = Card(Q) \).
 Donc \( Q \subseteq P \).
 
-\item Soit \( P \in Syl_{p}({G}) \). Montrons que pour tout \(p\)-sous-groupe \( Q \) de \( G \) il existe \( g \in G \) tel que \( Q \subseteq gPg^{-1} \), c'est-à-dire que \( Q \) est un sous-groupe conjugué de \( P \). On procède par disjonction de cas sur \( Q \).
+\item Soit \( P \in Syl_{p}({G}) \). Montrons que pour tout \(p\)-sous-groupe \( Q \) de \( G \) il existe \( g \in G \) tel que \( Q \subseteq gPg^{-1} \), c'est-à-dire que \( Q \) est un sous-groupe conjugué de \( P \). 
+
+	On procède par disjonction de cas sur \( Q \).
 	\par \textit{Premier cas : supposons que \( Q \) est un p-sous-groupe de Sylow de \( G \) :}\\
-	\( Card(Q) = p^{k}\) pour \( 1 \le k \le n \). Puique \( Card(P) = p^{l}\) pour 
+	\( Card(Q) = p^{k}\) pour \( 1 \le k \le n \). Puisque \( Card(P) = p^{l}\) pour 
 	\( 1 \le l \le n \) aussi, on a soit \( l \ge k \), soit \( l \le k \). Dans les 
 	deux cas il existe bien un \( g \in G \) tel que 
 	\( gPg^{-1} = Q \) donc à fortiori \( Q \subseteq gPg^{-1} \).
@@ -357,7 +361,7 @@ Donc \( \varPsi \) est un morphisme de groupes. Vérifions que \( \varPsi \) est
 
 Donc \( ker(\varPsi) = \{e_G\} \) et \( \varPsi \) est injectif. 
 
-Soit \( y \in gPg^{-1} \), alors il existe \( x \in P \) tel que \( y = gxg^{-1} \). On a \( \varphi(x) = gxg^{-1} = y \). Donc \( \varPsi \) est surjectif. D'où \( \varPsi \) est un isomorphisme et on a \( P \overset{\varPsi}{\cong} Q \).
+Soit \( y \in gPg^{-1} \), alors il existe \( x \in P \) tel que \( y = gxg^{-1} \). On a \( \varPsi(x) = gxg^{-1} = y \). Donc \( \varPsi \) est surjectif. D'où \( \varPsi \) est un isomorphisme et on a \( P \overset{\varPsi}{\cong} Q \).
 
 \item Soit \( P \in Syl_{p}(G) \), et \( \chi \) l'action de conjugaison de \( G \) sur \( Syl_{p}(G) \) :
 \begin{align*}
@@ -365,7 +369,7 @@ Soit \( y \in gPg^{-1} \), alors il existe \( x \in P \) tel que \( y = gxg^{-1}
 	(g,P) &\mapsto g.P = gPg^{-1}
 \end{align*}
 
-Puisque \( P \) est en particulier un \(p\)-groupe, \( n_p(G) \mod p \) est le nombre de points fixes de \( \chi \). Montrons que \( P \) est le seul point fixe de \( \chi \), cela est équivalent à montrer que \( Stab_P(G) = \{ g \in G \mid g.P = gPg^{-1} = P \} = P \) donc que \( N_G(P) = P \) et \( P \triangleleft G \). 
+Puisque \( P \) est en particulier un \(p\)-groupe, \( n_p(G) \mod p \) est le nombre de points fixes de \( \chi \). Montrons que \( P \) est le seul point fixe de \( \chi \), cela est équivalent à montrer que \( Stab_P(G) = \{ g \in G \mid g.P = gPg^{-1} = P \} = P \) donc que \( N_G(P) = G \) et \( P \triangleleft G \). 
 
 Soit \( Q \) un autre point fixe de \( \chi \), on a \(Q \in Stab_Q(G) = \{g.Q \mid g.Q = gQg^{-1} = Q \}  \). Alors \( N_G(Q) = \{ g \in G \mid gQg^{-1} = Q\} \) avec \( P \subset N_G(Q) \) et \( Q \subset N_G(Q) \). \\
 On applique \ref{S3} sur \( N_G(Q) \) : \( P \) et \( Q \) sont des \(p\)-sous-groupes de Sylow de \( N_G(Q) \), donc ce sont des sous-groupes conjugués. D'où \( P = Q \) et \( P \) est le seul point fixe de \( \chi \). On en déduit que \( n_p(G) \equiv 1 \mod p \). \\
@@ -380,9 +384,9 @@ D'où \( n_p(G) \) divise \( Card(G) \). Or \( Card(G) = p^{n}m \) et \( n_p(G) 
 \end{proof}
 
 \begin{remark}
-	Il existe d'autres preuves utilisant des arguments similaires à ceux que nous avons exposés avec des actions de groupes, comme par exemple celle de \cite[p.~ 140-141]{dummit2003abstract} où l'on retrouve aussi l'équation aux classes.
+	Il existe d'autres preuves utilisant des arguments similaires à ceux que nous avons exposés avec des actions de groupes, comme par exemple celle de \cite[p.~ 140-141]{dummit2003abstract} où l'on utilise aussi l'équation aux classes.
 
-	Mentionnons aussi les théorèmes de Hall qui généralisent ceux de Sylow dans le cadre des groupes finis solvables (nous avons choisi de ne pas les exposer car cela dépasse le cadre du sujet et les preuves sont plus techniques), dont on peut trouver une présentation dans \cite[p.~ 40-44]{serre1979ens}.
+	Mentionnons aussi les théorèmes de Hall qui généralisent ceux de Sylow dans le cadre des groupes résolubles (nous ne les exposons pas ici car cela dépasse le cadre du sujet et les preuves sont plus techniques), dont on peut trouver une présentation dans \cite[p.~ 40-44]{serre1979ens}.
 \end{remark}
 
 \selectlanguage{english}
@@ -409,7 +413,7 @@ Given groups of small order one can force the existence of a normal subgroup in 
 \end{proposition}
 
 \begin{proof}
-	By Sylow's theorem \ref{S4}, \( n_q(G) = 1 + kq \) for \( k \in \mathbb{N} \). Moreover \( n_q(G) \) divides \( p \), that is to say \( p = n_q(G).a = (1 + kq). a \) for some \( a \in \mathbb{N} \). 
+	By Sylow's Theorem \ref{S4}, \( n_q(G) = 1 + kq \) for \( k \in \mathbb{N} \). Moreover \( n_q(G) \) divides \( p \), that is to say \( p = n_q(G).a = (1 + kq). a \) for some \( a \in \mathbb{N} \). 
 	If \( k \geq 1 \) then \( p = (a + kqa) > q \) which is impossible since \( p < q \).
 	Hence \( k = 0 \).
 	Thus \( n_q(G) = 1 \) and \( [G : N_G(Q)] = 1 \), so \( N_G(Q) = G \).
@@ -425,7 +429,7 @@ Given groups of small order one can force the existence of a normal subgroup in 
 
 \subsection{Classifing all groups of a given order n up to isomorphism}
 
-\par One can use Sylow's theorem to prove whether a group \( G \) is simple or not. Given the order \( n \) and the simplicity of \( G \), one can then classify all groups of order \( n \) up to isomorphism. We first define these notions using mainly \cite[p.~103]{dummit2003abstract}.
+\par One can use Sylow's theorems to prove whether a group \( G \) is simple or not. Given the order \( n \) and the simplicity of \( G \), one can then classify all groups of order \( n \) up to isomorphism. We first define this notion using \cite[p.~103]{dummit2003abstract}.
 
 
 \begin{defeng}[Simple group]
@@ -434,26 +438,26 @@ Given groups of small order one can force the existence of a normal subgroup in 
 \end{defeng}
 
 \par Simple group arise in a similar way to prime numbers in the unique factorization of integers : we can break down a group \( G \) into smaller pieces, namely the simple groups, to unravel the structure of \( G \).
-This is precisely the notion of a \textit{composition series}.
+%This is precisely the notion of a \textit{composition series}.
 
-\begin{defeng}[Composition series]
-	A composition series of a group \( G \) is a sequence of subgroups \( H_0, \ldots, H_n \) such that :
-	\begin{enumerate}[label = (\roman*)]
-	\item the subgroups are pairwise normal : 
-		\( H_i \triangleleft H_{i+1} \) for \( 0 \leq i \leq n-1 \)
-	\item the pairwise quotient groups, called the \textit{composition factors}, are all simple :
-		\( H_{i+1}/H_{i} \) is a simple group for \( 0 \leq i \leq n-1 \)
+%\begin{defeng}[Composition series]
+%	A composition series of a group \( G \) is a sequence of subgroups \( H_0, \ldots, H_n \) such that :
+%	\begin{enumerate}[label = (\roman*)]
+%	\item the subgroups are pairwise normal : 
+%		\( H_i \triangleleft H_{i+1} \) for \( 0 \leq i \leq n-1 \)
+%	\item the pairwise quotient groups, called the \textit{composition factors}, are all simple :
+%		\( H_{i+1}/H_{i} \) is a simple group for \( 0 \leq i \leq n-1 \)
 
-	\end{enumerate}
-\par In practice, \( n \) is chosen to be as large as possible so that we have
-a maximal number of distinct composition factors. The following theorem which we admit asserts that up to a permutation of the composition factors, a finite group \( G \) has a unique composition series.
+%	\end{enumerate}
+%\par In practice, \( n \) is chosen to be as large as possible so that we have
+%a maximal number of distinct composition factors. The following theorem which we admit asserts that up to a permutation of the composition factors, a finite group \( G \) has a unique composition series.
 
-\begin{thmeng}[Jordan-Hölder]
-	Every finite group \( G \) has a unique composition series up to a permutation of the composition factors.	
-\end{thmeng}
-\end{defeng}
+%\begin{thmeng}[Jordan-Hölder]
+%	Every finite group \( G \) has a unique composition series up to a permutation of the composition factors.	
+%\end{thmeng}
+%\end{defeng}
 
-\par We first study the case \( Card(G) = 10 \), for which we need the following definition.
+\par We can now give examples of classification of small order groups. One can show the result for groups of other small order in a similar way. We first study the case \( Card(G) = 10 \), for which we need the following definition.
 \begin{defeng}[Dihedral group]
 	The dihedral group \( D_{2n} \) of order \( 2n \) is the group generated by rotations and symmetries in a regular \(n\)-gon, which has the presentation 
 	\begin{equation*}
@@ -461,14 +465,12 @@ a maximal number of distinct composition factors. The following theorem which we
 	\end{equation*}
 \end{defeng}
 
-We can now prove the following :
-
 \begin{propeng}[Groups of order 10]
 	There are only two groups of order 10 up to isomorphism : \( \mathbb{Z}_{10} \) the cylic group of order 10 and \( D_{10} \) the dihedral group of order 10.
 \end{propeng}
 
 \begin{proof}
-	Let \( G \) be of order 10. We break down in two cases : either \( G \) is simple or not. We will prove that if \( G \) is simple then \( G \cong D_{10} \) and otherwise \( G \cong \mathbb{Z}_{10} \).
+	Let \( G \) be a group of order 10. We break down in two cases : either \( G \) is simple or not. We will prove that if \( G \) is simple then \( G \cong D_{10} \) and otherwise \( G \cong \mathbb{Z}_{10} \).
 
 	Observe that \( Card(G) = 10 = 2 \times 5 \) with primes \( 2 < 5\). By \cref{primes}, given \( Q \in Syl_5(G) \) then \( Q \triangleleft G \) (or we can say that since \( [G:Q] = 2 \) then \( Q \triangleleft G \)).
 	Moreover by Sylow's Theorem \ref{S4} there are one or five subgroups in \( Syl_2(G) \). In the first case, this subgroup is normal in \( G \) so \( G \) is not simple. \( G \) is generated by elements of order \( 2 \) and \( 5 \) which commute so it is abelian, hence \( G \cong \mathbb{Z}_{10} \). Now in the second case, since \( n_2(G) = 5 \) then \( G \) has 5 elements of order 2 and similarly has 5 elements of order 5. Identifying those with rotations (order 5) and symmetries (order 2) in \( D_{10} \), we get \( G \cong D_{10} \) as desired.
@@ -479,17 +481,19 @@ Let \( G \) be a group of order 15. Then \( G \cong \mathbb{Z}_{15} \).
 \end{propeng}
 
 \begin{proof}
-	As in the proof of the previous proposition, observe that \( Card(G) = 15 = 3 \times 5 \) with primes \( 3 < 5 \).	
+	As in the previous proof, \( Card(G) = 15 = 3 \times 5 \) with primes \( 3 < 5 \). By \cref{primes}, given \( Q \in Syl_5(G) \) then \( Q \triangleleft G \). And by Sylow's Theorem \ref{S4} \( n_5(G) = 1 + 5l \) for some \( l \in \mathbb{N} \) and \( n_5(G) \) divides \( 15 \). Hence \( n_5(G) = 1 \). 
+
+	Pick \( P \in Syl_3(G) \), then Sylow's Theorem \ref{S4} yields \( n_3(G) = 1 + 3k \) for some \( k \in \mathbb{N} \) and \( n_3(G) \) divides \( 15 \) so \( n_3(G) \) = 1. Thus \( P \) and \( Q \) are unique. Hence Sylow's Theorem \ref{S3} yields \( P \triangleleft G \). Thus by \cref{primes} \( G \) is cyclic and \( G \cong \mathbb{Z}_{15} \).
 \end{proof}
 
-\begin{propeng}[Groups of order 60]
-	There are only two groups of order 60 up to isomorphism: \( A_5 \) and \( Z_{60} \).
-\end{propeng}
+%\begin{propeng}[Groups of order 45]
+%	Let \( G \) be a group of order 45. Then either \( G \cong \mathbb{Z}_{45} \) or \( G \cong \mathbb{Z}_{15} \times \mathbb{Z}_3 \).
+%\end{propeng}
 
 
 \clearpage
 
 \selectlanguage{french}
-\printbibliography
+\printbibliography[heading=bibintoc]
 
 \end{document}
