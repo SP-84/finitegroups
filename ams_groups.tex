@@ -184,9 +184,13 @@ Un exemple important d'action de \( G \) sur un ensemble \( A \) que nous allons
 	(g,a) &\mapsto a^{g} \coloneq gag^{-1}
 \end{align*}
 
-Le résultat suivant a été démontré en cours.  
+Nous utiliserons les deux résultats suivants démontrés en cours.  
+\begin{theorem}[Théorème de Lagrange] \label{thm:lagrange}
+	Soit \( G \) un groupe d'ordre fini \( n \). Soit \( H \) un sous-groupe de \( G \) d'ordre \( m \). Alors \( n \) est un multiple de \( m \).
+\end{theorem}
+
 \begin{proposition}[Bijection entre \ensuremath{G/Stab_G(x)} et \ensuremath{O_x}]\label{prop:bij}
-	Soit \( G \) un groupe, \( \varphi : G \times A \rightarrow A \) une action à gauche de \( G \) sur \( A \) et \( x \in A \). Alors \( G/Stab_G(x) \) et \( O_x \) sont en bijection.
+	Soit \( G \) un groupe, \( \varphi : G \times A \rightarrow A \) une action à gauche de \( G \) sur \( A \) et \( x \in A \). Alors il existe une bijection entre l'ensemble \( G/Stab_G(x) \) des classes à gauche de \( G \) modulo le stabilisateur \( Stab_G(x) \) de \( x \) et l'orbite \( O_x \) de \( x \).
 \end{proposition}
 
 \begin{definition}[Normalisateur de \ensuremath{H} dans \ensuremath{G}]\cite[p.~217]{chen2024napkin}.
@@ -236,7 +240,7 @@ En écrivant \( m \) en base \( p \)
 \begin{equation*}
 	m = \sum_{i=0}^{k} m_i p^i
 \end{equation*}
-avec \( k \in \mathbb{N} \) et \( m_i \in \mathbb{N} \) tels que \( 0 \leq m_i \leq p-1 \), on a : 
+avec \( k \in \mathbb{N} \) et \( m_i \in \mathbb{N} \) tels que \( 0 \leq m_i \leq p-1 \), on a par la formule de binôme de Newton :
 
 \begin{align*}
 	\sum_{n=0}^{m} \binom{m}{n} X^n &= (1+X)^m = \prod_{i=0}^{k} \left((1+X)^{p^i}\right)^{m_i} \\
@@ -254,7 +258,7 @@ avec \( k \in \mathbb{N} \) et \( m_i \in \mathbb{N} \) tels que \( 0 \leq m_i \
 	Soit \( G \) un groupe et \( p \) un nombre premier.
 	\begin{enumerate}[label = (\roman*)]
 	\item Si \( Card(G) = p^{n} \) pour un \( n > 0 \), \( G \) est un \textit{p-groupe}. Un sous-groupe \( H \) de \( G \) est appelé \textit{p-sous groupe}.
-	\item Si \( Card(G) = p^{n}m \) où m n'est pas un multiple de p, alors un sous-groupe d'ordre \( p^{n} \) est appelé \textit{p-sous-groupe de Sylow de G}.
+	\item Si \( Card(G) = p^{n}m \) où \( m \) n'est pas un multiple de \( p \), alors un sous-groupe d'ordre \( p^{n} \) est appelé \textit{p-sous-groupe de Sylow de G}.
 	\item L'ensemble des \(p\)-sous-groupes de Sylow de \( G \) est noté \( Syl_{p}(G) \), et le nombre de \(p\)-sous-groupes de Sylow de \( G \) est noté \( n_{p}(G) \).
 	\end{enumerate}
 \end{definition}
@@ -286,7 +290,7 @@ Cette preuve est due à \cite[p.~216-218]{chen2024napkin}. Nous avons explicité
 une action de \( G \) sur \( X \), où \( X \) désigne l'ensemble des parties de \( G \) de cardinal \( p^{n} \). En utilisant le théorème \ref{thm:lucas} avec 
 
 \begin{equation*}
-	\binom{p^{n}m}{p^{n}} = \prod_{i=0}^{n} \binom{n_i}{k_i} = \prod_{i=0}^{n} \binom{m}{1} = m \not\equiv 0 \mod p
+	\binom{p^{n}m}{p^{n}} = \prod_{i=0}^{r} \binom{n_i}{k_i} \not\equiv 0 \mod p
 \end{equation*}
 
 où \( 0 \leq m \leq p-1 \), on en déduit que 
@@ -315,8 +319,10 @@ Or pour \( s \in S \) fixé, on a :
 
 S est partitionné en orbites que l'on note \( O_s \) où \( s \in S \). On a alors \( S = \bigsqcup_{s \in S} O_{s} \) et \( Card(S) = \sum_{s \in S} Card(O_{s}) \).
 D'après le résultat \ref{prop:bij} du cours, une orbite \( O_s \) de \( S \) sous \( \psi \) est de cardinal \( Card(O_s) = [H : Stab_{H}({s}) ] = Card(H) \) car \( Card(Stab_{H}({s})) = Card(\{e_{G}\}) = 1 \). \\
-D'où \( Card(S) = \sum_{s \in S} Card(O_{s}) = \sum Card(H) \).\\ 
-Ainsi \( Card(H) \) divise \( Card(S) = p^{n} \). D'où on a \( Card(H) = p^{n} \).
+D'où \( Card(S) = \sum_{s \in S} Card(O_{s}) = \sum_{s \in S} Card(H) \).\\ 
+Ainsi \( Card(H) \) divise \( Card(S) = p^{n} \). 
+
+Par double implication on a \( Card(H) = p^{n} \).
 
 \item Soit \( Q \) un sous-groupe de \( G \) d'ordre \( p^{r} \) avec \( 0 \leq r \leq n \). 
 D'après (i) au moins un \( P \in Syl_p(G) \) existe, où \( Card(P) = p^{n} \geq p ^{r} = Card(Q) \).
@@ -327,7 +333,7 @@ Donc \( Q \subseteq P \).
 	On procède par disjonction de cas sur \( Q \).
 	\par \textit{Premier cas : supposons que \( Q \) est un p-sous-groupe de Sylow de \( G \) :}\\
 	\( Card(Q) = p^{k}\) pour \( 1 \le k \le n \). Puisque \( Card(P) = p^{l}\) pour 
-	\( 1 \le l \le n \) aussi, on a soit \( l \ge k \), soit \( l \le k \). Dans les 
+	\( 1 \le l \le n \) aussi, on a soit \( l \ge k \), soit \( l < k \). Dans les 
 	deux cas il existe bien un \( g \in G \) tel que 
 	\( gPg^{-1} = Q \) donc à fortiori \( Q \subseteq gPg^{-1} \).
 	
@@ -347,12 +353,12 @@ De plus, dans le premier cas où \( Q \in Syl_p(G) \), montrons que \( \varPsi :
 Pour tout \( x_1,x_2 \in P \), on a :
 \begin{align*}
 	\varPsi(x_1x_2) &= gx_1x_2g^{-1} \\
-			&= gx_1e_Gg^{-1} \\
+			&= gx_1e_Gx_2g^{-1} \\
 			&= gx_1g^{-1}gx_2g^{-1} \\
 			&= \varPsi(x_1)\varPsi(x_2) 
 \end{align*}
 
-Donc \( \varPsi \) est un morphisme de groupes. Vérifions que \( \varPsi \) est bijectif.
+Donc \( \varPsi \) est un morphisme de groupes. Vérifions que \( \varPsi \) est bijectif. Soit \( x \in P \), on a
 \begin{align*}
 	x \in ker(\varPsi) &\iff \varPsi(x) = e_G \\
 			   &\iff gxg^{-1} = e_G \\
@@ -386,7 +392,7 @@ D'où \( n_p(G) \) divise \( Card(G) \). Or \( Card(G) = p^{n}m \) et \( n_p(G) 
 \begin{remark}
 	Il existe d'autres preuves utilisant des arguments similaires à ceux que nous avons exposés avec des actions de groupes, comme par exemple celle de \cite[p.~ 140-141]{dummit2003abstract} où l'on utilise aussi l'équation aux classes.
 
-	Mentionnons aussi les théorèmes de Hall qui généralisent ceux de Sylow dans le cadre des groupes résolubles (nous ne les exposons pas ici car cela dépasse le cadre du sujet et les preuves sont plus techniques), dont on peut trouver une présentation dans \cite[p.~ 40-44]{serre1979ens}.
+	Mentionnons aussi les théorèmes de Hall qui généralisent ceux de Sylow dans le cadre des groupes résolubles, dont on peut trouver une présentation dans \cite[p.~ 40-44]{serre1979ens}.
 \end{remark}
 
 \selectlanguage{english}
@@ -422,7 +428,7 @@ Given groups of small order one can force the existence of a normal subgroup in 
 	Now suppose \( P \triangleleft G \). Let \( P = \langle x \rangle \) and \( Q = \langle y \rangle \).
 
 	Define the \textit{centralizer of P in G} as the set \( C_G(P) = \{ g \in G \mid gpg^{-1} = p, \forall p \in P\} \). In particular it is a subgroup of \( G \). Recall that \( \Aut({\mathbb{Z}_{p}}) \) is the group of automorphisms of \( \mathbb{Z}_{p} \) of order \( p-1 \).
-	Since \( P \triangleleft G \) there exists a subgroup \( H \) of \( \Aut({\mathbb{Z}_{p}}) \) such that \( G/C_G(P) \) is isomorphic to \( H \). Since \( p \) does not divide \( p-1 \) and \( q \) does not divide \( p-1 \), then by Lagrange's theorem we have \( G = C_G(P) \). In this case \( P \) is a subgroup of \( Z(G)\) the center of \( G \), hence \( xy = yx \). 
+	Since \( P \triangleleft G \) there exists a subgroup \( H \) of \( \Aut({\mathbb{Z}_{p}}) \) such that \( G/C_G(P) \) is isomorphic to \( H \). Since \( p \) does not divide \( p-1 \) and \( q \) does not divide \( p-1 \), then by Lagrange's Theorem \ref{thm:lagrange} we have \( G = C_G(P) \). In this case \( P \) is a subgroup of \( Z(G)\) the center of \( G \), hence \( xy = yx \). 
 
 	The order of \( xy \) is equal to \( pq \). Thus \( G \) is cyclic and \( G \cong \mathbb{Z}_{pq} \).
 \end{proof}
@@ -481,7 +487,7 @@ Let \( G \) be a group of order 15. Then \( G \cong \mathbb{Z}_{15} \).
 \end{propeng}
 
 \begin{proof}
-	As in the previous proof, \( Card(G) = 15 = 3 \times 5 \) with primes \( 3 < 5 \). By \cref{primes}, given \( Q \in Syl_5(G) \) then \( Q \triangleleft G \). And by Sylow's Theorem \ref{S4} \( n_5(G) = 1 + 5l \) for some \( l \in \mathbb{N} \) and \( n_5(G) \) divides \( 15 \). Hence \( n_5(G) = 1 \). 
+	As in the previous proof, \( Card(G) = 15 = 3 \times 5 \) with primes \( 3 < 5 \). By \cref{primes}, given \( Q \in Syl_5(G) \) then \( Q \triangleleft G \). By Sylow's Theorem \ref{S4} we have \( n_5(G) = 1 + 5l \) for some \( l \in \mathbb{N} \) and \( n_5(G) \) divides \( 15 \). Hence \( n_5(G) = 1 \). 
 
 	Pick \( P \in Syl_3(G) \), then Sylow's Theorem \ref{S4} yields \( n_3(G) = 1 + 3k \) for some \( k \in \mathbb{N} \) and \( n_3(G) \) divides \( 15 \) so \( n_3(G) \) = 1. Thus \( P \) and \( Q \) are unique. Hence Sylow's Theorem \ref{S3} yields \( P \triangleleft G \). Thus by \cref{primes} \( G \) is cyclic and \( G \cong \mathbb{Z}_{15} \).
 \end{proof}
